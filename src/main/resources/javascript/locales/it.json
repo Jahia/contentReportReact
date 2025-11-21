@@ -5,6 +5,7 @@
     "categories": {
       "overview": "Panoramica",
       "content": "Contenuto",
+      "references": "Riferimenti",
       "languages": "Lingue",
       "visibility": "Visibilità",
       "metadata": "Metadati",
@@ -43,6 +44,7 @@
       "byAuthor": "Elenca i contenuti creati o modificati da autori specifici.",
       "byAllDate": "Scomponi l'attività dei contenuti per mese e tipo.",
       "references": "Il report contiene solo i contenuti utilizzati in qualsiasi pagina. I contenuti non utilizzati dalle cartelle dei contenuti non verranno visualizzati.",
+      "unusedAssets": "Elenca le risorse memorizzate sotto il percorso di file selezionato che non sono referenziate in nessun contenuto del sito.",
       "byAuthorAndDate": "Filtra i contenuti combinando criteri di data e autore.",
       "wipContent": "Visualizza i contenuti contrassegnati come Lavori in Corso (WIP). Questi elementi sono ancora in fase di modifica e non sono pronti per la pubblicazione.",
       "contentWaitingPublication": "Elenca tutti i contenuti che hanno un'attività di flusso di lavoro in sospeso. Ciò include contenuti in attesa di revisione, approvazione o pubblicazione.",
@@ -89,6 +91,7 @@
       "typeAuthorSearch": "Condizione autore",
       "originPath": "Visualizza i riferimenti ai contenuti trovati in",
       "destinationPath": "che fanno riferimento a contenuti da",
+      "assetsRootPath": "Analizza i file a partire da questo percorso",
       "dateRange": "Intervallo di date",
       "authorFilters": "Filtri autore"
     },
@@ -157,6 +160,16 @@
           "referencePath": "Percorso del riferimento",
           "lastModified": "Data di ultima modifica del contenuto riferito",
           "link": "Collegamento al riferimento"
+        }
+      },
+      "unusedAssets": {
+        "columns": {
+          "mimeType": "Tipo",
+          "name": "Nome risorsa",
+          "path": "Percorso",
+          "creator": "Creato da",
+          "created": "Creato il",
+          "lastModified": "Ultima modifica"
         }
       },
       "wipContent": {

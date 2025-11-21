@@ -26,6 +26,7 @@ The Content Report React module offers a modern, user-friendly interface for gen
 - **By Content Type**: Analyze content distribution by type
 - **By Status**: View content by publication status
 - **Marked for Deletion**: Track content scheduled for removal
+- **Unreferenced Assets**: Audit files under `/sites/<site>/files` that are not referenced anywhere, with direct links into media folders and inline previews for images
 - **Live Contents**: Report on published content
 - **Expired/Future Content**: Monitor time-sensitive content
 

@@ -1,10 +1,12 @@
 const DEFAULT_ROUTE = '/contentReportReact';
 
 const PATH_DEFAULT = ({siteKey}) => (siteKey ? `/sites/${siteKey}` : '');
+const FILES_PATH_DEFAULT = ({siteKey}) => (siteKey ? `/sites/${siteKey}/files` : '');
 
 const reportCategories = [
     {id: 'overview', labelKey: 'categories.overview'},
     {id: 'content', labelKey: 'categories.content'},
+    {id: 'references', labelKey: 'categories.references'},
     {id: 'languages', labelKey: 'categories.languages'},
     {id: 'visibility', labelKey: 'categories.visibility'},
     {id: 'metadata', labelKey: 'categories.metadata'},
@@ -168,7 +170,7 @@ const reports = [
         labelKey: 'menu.references',
         descriptionKey: 'descriptions.references',
         type: 'legacy',
-        category: 'content',
+        category: 'references',
         fields: [
             {name: 'pathTxtOrigin', type: 'path', labelKey: 'fields.originPath', defaultValue: PATH_DEFAULT, required: true},
             {name: 'pathTxtDestination', type: 'path', labelKey: 'fields.destinationPath', defaultValue: PATH_DEFAULT, required: true}
@@ -179,6 +181,24 @@ const reports = [
             {key: 'referencePath', labelKey: 'reports.references.columns.referencePath', sortable: true},
             {key: 'lastModified', labelKey: 'reports.references.columns.lastModified', sortable: true, type: 'date'},
             {key: 'link', labelKey: 'reports.references.columns.link', sortable: false, type: 'link'}
+        ]
+    },
+    {
+        id: '28',
+        labelKey: 'menu.unusedAssets',
+        descriptionKey: 'descriptions.unusedAssets',
+        type: 'legacy',
+        category: 'references',
+        fields: [
+            {name: 'assetsRootPath', type: 'path', labelKey: 'fields.assetsRootPath', defaultValue: FILES_PATH_DEFAULT, required: true}
+        ],
+        columns: [
+            {key: 'mimeType', labelKey: 'reports.unusedAssets.columns.mimeType', sortable: false, type: 'icon'},
+            {key: 'name', labelKey: 'reports.unusedAssets.columns.name', sortable: true},
+            {key: 'path', labelKey: 'reports.unusedAssets.columns.path', sortable: true, type: 'link'},
+            {key: 'creator', labelKey: 'reports.unusedAssets.columns.creator', sortable: true},
+            {key: 'created', labelKey: 'reports.unusedAssets.columns.created', sortable: true, type: 'date'},
+            {key: 'lastModified', labelKey: 'reports.unusedAssets.columns.lastModified', sortable: true, type: 'date'}
         ]
     },
     {

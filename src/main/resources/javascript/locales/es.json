@@ -5,6 +5,7 @@
     "categories": {
       "overview": "Resumen",
       "content": "Contenido",
+      "references": "Referencias",
       "languages": "Idiomas",
       "visibility": "Visibilidad",
       "metadata": "Metadatos",
@@ -43,6 +44,7 @@
       "byAuthor": "Liste el contenido creado o modificado por autores específicos.",
       "byAllDate": "Desglose la actividad del contenido por mes y tipo.",
       "references": "El informe solo contiene contenido que se utiliza en alguna página. El contenido no utilizado de las carpetas de contenido no aparecerá.",
+      "unusedAssets": "Enumera los recursos almacenados bajo la ruta de archivos seleccionada que no están referenciados en ningún contenido del sitio.",
       "byAuthorAndDate": "Filtre el contenido combinando criterios de fecha y autor.",
       "wipContent": "Vea el contenido marcado como Trabajo en Progreso (WIP). Estos elementos aún se están editando y no están listos para su publicación.",
       "contentWaitingPublication": "Liste todo el contenido que tiene una tarea de flujo de trabajo pendiente. Esto incluye contenido en espera de revisión, aprobación o publicación.",
@@ -89,6 +91,7 @@
       "typeAuthorSearch": "Condición del autor",
       "originPath": "Mostrar las referencias de contenido encontradas en",
       "destinationPath": "que hacen referencia al contenido de",
+      "assetsRootPath": "Buscar en esta ruta de archivos",
       "dateRange": "Rango de fechas",
       "authorFilters": "Filtros de autor"
     },
@@ -157,6 +160,16 @@
           "referencePath": "Ruta de la referencia",
           "lastModified": "Fecha de última modificación del contenido referenciado",
           "link": "Enlace a la referencia"
+        }
+      },
+      "unusedAssets": {
+        "columns": {
+          "mimeType": "Tipo",
+          "name": "Nombre del recurso",
+          "path": "Ruta",
+          "creator": "Creador",
+          "created": "Creado",
+          "lastModified": "Última modificación"
         }
       },
       "wipContent": {

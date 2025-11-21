@@ -1,8 +1,8 @@
 import React, {useState, useMemo, useCallback} from 'react';
 import PropTypes from 'prop-types';
 import {useTranslation} from 'react-i18next';
-import {Typography, Table, TableHead, TableBody, TableRow, TableHeadCell, TableBodyCell, TablePagination, Button} from '@jahia/moonstone';
-import {Download, OpenInNew} from '@jahia/moonstone/dist/icons';
+import {Typography, Table, TableHead, TableBody, TableRow, TableHeadCell, TableBodyCell, TablePagination, Button, Tooltip} from '@jahia/moonstone';
+import {Download, OpenInNew, File, FileImage, FileVideo, FileSound, FilePdf, FileZip, FileText} from '@jahia/moonstone/dist/icons';
 import styles from './ReportResultsTable.module.scss';
 
 const formatDate = dateString => {
@@ -85,6 +85,81 @@ const buildJContentUrl = (path, siteKey, language) => {
     return `${baseUrl}/jahia/jcontent/${siteKey}/${language || 'en'}/pages/${cleanPath}`;
 };
 
+const buildMediaFolderUrl = (path, siteKey, language) => {
+    if (!path || !siteKey) {
+        return null;
+    }
+
+    const baseUrl = window.contextJsParameters?.contextPath || '';
+    const mediaRoot = `/sites/${siteKey}/files`;
+    if (!path.startsWith(mediaRoot)) {
+        return null;
+    }
+
+    const lastSlash = path.lastIndexOf('/');
+    let parentPath = lastSlash > mediaRoot.length ? path.substring(0, lastSlash) : mediaRoot;
+    let relativePath = parentPath.substring(mediaRoot.length);
+    relativePath = relativePath.replace(/^\/+/, '');
+    const suffix = relativePath ? `/${relativePath}` : '';
+
+    return `${baseUrl}/jahia/jcontent/${siteKey}/${language || 'en'}/media/files${suffix}`;
+};
+
+const getMimeIconComponent = mimeType => {
+    if (!mimeType) {
+        return File;
+    }
+
+    const lower = mimeType.toLowerCase();
+    if (lower.startsWith('image/')) {
+        return FileImage;
+    }
+
+    if (lower.startsWith('video/')) {
+        return FileVideo;
+    }
+
+    if (lower.startsWith('audio/')) {
+        return FileSound;
+    }
+
+    if (lower === 'application/pdf') {
+        return FilePdf;
+    }
+
+    if (lower.includes('zip') || lower.includes('compressed')) {
+        return FileZip;
+    }
+
+    if (lower.startsWith('text/')) {
+        return FileText;
+    }
+
+    return File;
+};
+
+const isImageMimeType = mimeType => {
+    return typeof mimeType === 'string' && mimeType.toLowerCase().startsWith('image/');
+};
+
+const buildAssetPreviewUrl = (path, lastModified) => {
+    const baseUrl = window.contextJsParameters?.contextPath || '';
+    if (!path) {
+        return '';
+    }
+
+    let url = `${baseUrl}/files/default${path}`;
+
+    if (lastModified) {
+        const timestamp = Date.parse(lastModified);
+        if (!Number.isNaN(timestamp)) {
+            url += `${url.includes('?') ? '&' : '?'}v=${timestamp}`;
+        }
+    }
+
+    return url;
+};
+
 // Component to render table header cells
 const TableHeaders = ({useCustomColumns, columns, sortColumn, sortDirection, handleSort, t, siteLanguages}) => {
     if (useCustomColumns) {
@@ -94,10 +169,14 @@ const TableHeaders = ({useCustomColumns, columns, sortColumn, sortDirection, han
                 siteLanguages[column.languageIndex - 1] :
                 t(column.labelKey);
 
+            const headerClassName = column.sortable ?
+                `${styles.sortableHeader} ${column.type === 'icon' ? styles.mimeIconHeader : ''}`.trim() :
+                (column.type === 'icon' ? styles.mimeIconHeader : undefined);
+
             return (
                 <TableHeadCell
                     key={column.key}
-                    className={column.sortable ? styles.sortableHeader : undefined}
+                    className={headerClassName}
                     onClick={column.sortable ? () => handleSort(index) : undefined}
                 >
                     <span className={styles.headerContent}>
@@ -151,6 +230,7 @@ const ReportResultsTable = ({data, siteKey, language, columns, reportId, reportT
     const [rowsPerPage, setRowsPerPage] = useState(50);
     const [sortColumn, setSortColumn] = useState(null);
     const [sortDirection, setSortDirection] = useState('asc');
+    const [imagePreview, setImagePreview] = useState(null);
 
     console.log('ReportResultsTable - data:', data);
     console.log('ReportResultsTable - siteKey:', siteKey);
@@ -200,8 +280,21 @@ const ReportResultsTable = ({data, siteKey, language, columns, reportId, reportT
 
     // Helper function to render cell value based on column type
     const renderCellValue = useCallback((value, columnType, rowData, columnKey) => {
+        const normalizedKey = columnKey ? columnKey.toLowerCase() : '';
+        const isPathValue = normalizedKey.includes('path');
+        const pathLabel = value !== null && value !== undefined ? String(value) : '';
+
         if (columnType === 'date') {
             return formatDate(value);
+        }
+
+        if (columnType === 'icon') {
+            const Icon = getMimeIconComponent(value);
+            return (
+                <span className={styles.mimeIconWrapper} title={value || t('reports.unusedAssets.columns.mimeType')}>
+                    <Icon size="default"/>
+                </span>
+            );
         }
 
         if (columnType === 'boolean') {
@@ -215,11 +308,30 @@ const ReportResultsTable = ({data, siteKey, language, columns, reportId, reportT
         }
 
         if (columnType === 'link' && siteKey && language) {
+            if (reportId === '28') {
+                const targetPath = columnKey === 'path' ? value : (value || rowData[4]);
+                const mediaUrl = buildMediaFolderUrl(targetPath, siteKey, language);
+                if (mediaUrl) {
+                    return (
+                        <a href={mediaUrl} target="_blank" rel="noopener noreferrer" className={styles.pathLink} title={targetPath}>
+                            {value}
+                            <OpenInNew size="small" style={{marginLeft: '4px', verticalAlign: 'middle'}}/>
+                        </a>
+                    );
+                }
+            }
+
             // For path columns in i18n reports, show the path as a link
             if (columnKey === 'path' && value) {
                 const jcontentUrl = buildJContentUrl(value, siteKey, language);
                 return (
-                    <a href={jcontentUrl} target="_blank" rel="noopener noreferrer" className={styles.pathLink}>
+                    <a
+                        href={jcontentUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.pathLink}
+                        title={value}
+                    >
                         {value}
                         <OpenInNew size="small" style={{marginLeft: '4px', verticalAlign: 'middle'}}/>
                     </a>
@@ -241,8 +353,16 @@ const ReportResultsTable = ({data, siteKey, language, columns, reportId, reportT
             return '-';
         }
 
+        if (isPathValue && value) {
+            return (
+                <Tooltip label={pathLabel}>
+                    <span className={styles.pathText}>{value}</span>
+                </Tooltip>
+            );
+        }
+
         return value || '-';
-    }, [siteKey, language, t]);
+    }, [siteKey, language, t, reportId]);
 
     // Handle column sorting
     const handleSort = columnIndex => {
@@ -324,7 +444,6 @@ const ReportResultsTable = ({data, siteKey, language, columns, reportId, reportT
 
     console.log('ReportResultsTable - Rendering table with', data.data.length, 'rows');
 
-    const buildEditUrl = path => buildJContentUrl(path, siteKey, language);
     const exportToCSV = () => exportDataToCSV(data.data, effectiveColumns, useCustomColumns);
     const exportToJSON = () => exportDataToJSON(data);
 
@@ -371,20 +490,48 @@ const ReportResultsTable = ({data, siteKey, language, columns, reportId, reportT
                     {paginatedData.map((row, rowIndex) => {
                         const rowKey = `row-${rowIndex}-${row[0] || rowIndex}`;
                         return (
-                            <TableRow key={rowKey}>
+                            <TableRow
+                                key={rowKey}
+                                onMouseEnter={event => {
+                                    if (reportId === '28' && isImageMimeType(row[0]) && row[2]) {
+                                        setImagePreview({
+                                            rowKey,
+                                            src: buildAssetPreviewUrl(row[2], row[5]),
+                                            x: event.clientX + 16,
+                                            y: event.clientY + 16
+                                        });
+                                    } else {
+                                        setImagePreview(null);
+                                    }
+                                }}
+                                onMouseMove={event => {
+                                    if (imagePreview && imagePreview.rowKey === rowKey) {
+                                        setImagePreview(prev => prev ? ({
+                                            ...prev,
+                                            x: event.clientX + 16,
+                                            y: event.clientY + 16
+                                        }) : prev);
+                                    }
+                                }}
+                                onMouseLeave={() => setImagePreview(null)}
+                            >
                                 {useCustomColumns ? (
                                     // Render custom columns based on report configuration
                                     effectiveColumns.map((column, colIndex) => {
                                         const cellValue = row[colIndex];
+                                        const isPathColumn = column.key && column.key.toLowerCase().includes('path');
+                                        const cellTitle = isPathColumn && typeof cellValue === 'string' && cellValue ? cellValue : undefined;
                                         const cellClassName = column.type === 'date' ? styles.dateCell :
                                             column.type === 'boolean' ? styles.booleanCell :
-                                            (column.isLanguage || column.key === 'path') ? styles.pathCell :
+                                            column.type === 'icon' ? styles.mimeIconCell :
+                                            (column.isLanguage || isPathColumn) ? styles.pathCell :
                                             (column.type === 'html' && column.noWrap === false) ? styles.htmlCell :
                                             undefined;
                                         return (
                                             <TableBodyCell
                                                 key={`${rowKey}-${column.key}`}
                                                 className={cellClassName}
+                                                title={cellTitle}
                                             >
                                                 {renderCellValue(cellValue, column.type, row, column.key)}
                                             </TableBodyCell>
@@ -394,17 +541,8 @@ const ReportResultsTable = ({data, siteKey, language, columns, reportId, reportT
                                     // Default columns for backward compatibility
                                     <>
                                         <TableBodyCell className={styles.titleCell}>{row[0] || '-'}</TableBodyCell>
-                                        <TableBodyCell className={styles.pathCell}>
-                                            {row[1] ? (
-                                                <a
-                                                    href={buildEditUrl(row[1])}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className={styles.pathLink}
-                                                >
-                                                    {row[1]}
-                                                </a>
-                                            ) : '-'}
+                                        <TableBodyCell className={styles.pathCell} title={row[1] || undefined}>
+                                            {renderCellValue(row[1], 'link', row, 'path')}
                                         </TableBodyCell>
                                         <TableBodyCell>{row[2] || '-'}</TableBodyCell>
                                         <TableBodyCell className={styles.dateCell}>{formatDate(row[3])}</TableBodyCell>
@@ -430,6 +568,11 @@ const ReportResultsTable = ({data, siteKey, language, columns, reportId, reportT
                 onPageChange={setCurrentPage}
                 onRowsPerPageChange={setRowsPerPage}
             />
+            {imagePreview && imagePreview.src && imagePreview.x !== null && imagePreview.y !== null && (
+                <div className={styles.rowPreview} style={{top: imagePreview.y, left: imagePreview.x}}>
+                    <img src={imagePreview.src} alt="" className={styles.rowPreviewImage}/>
+                </div>
+            )}
         </div>
     );
 };

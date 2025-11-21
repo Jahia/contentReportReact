@@ -74,8 +74,16 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    justify-content: space-between;
+    justify-content: flex-start;
     width: 100%;
+}
+
+.mimeIconHeader {
+    width: 40px;
+    min-width: 40px;
+    max-width: 40px;
+    text-align: center;
+    padding: 0 !important;
 }
 
 .sortIcon {
@@ -104,10 +112,22 @@
     display: inline-flex;
     align-items: center;
     gap: 4px;
+    flex-wrap: wrap;
+    word-break: break-word;
+    white-space: normal;
     
     &:hover {
         text-decoration: underline;
     }
+}
+
+.pathText {
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: middle;
 }
 
 .linkWithIcon {
@@ -120,6 +140,44 @@
     &:hover {
         text-decoration: underline;
     }
+}
+
+.mimeIconCell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    min-width: 40px;
+    max-width: 40px;
+    padding: 0 4px !important;
+}
+
+.mimeIconWrapper {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+}
+
+.rowPreview {
+    position: fixed;
+    pointer-events: none;
+    background: #fff;
+    border: 1px solid #e1e7f5;
+    border-radius: 4px;
+    padding: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 9999;
+    max-width: 320px;
+}
+
+.rowPreviewImage {
+    max-width: 300px;
+    max-height: 200px;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
 }
 
 .dateCell {

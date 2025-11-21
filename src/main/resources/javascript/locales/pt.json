@@ -5,6 +5,7 @@
     "categories": {
       "overview": "Visão Geral",
       "content": "Conteúdo",
+      "references": "Referências",
       "languages": "Idiomas",
       "visibility": "Visibilidade",
       "metadata": "Metadados",
@@ -43,6 +44,7 @@
       "byAuthor": "Liste o conteúdo criado ou modificado por autores específicos.",
       "byAllDate": "Detalhe a atividade do conteúdo por mês e tipo.",
       "references": "O relatório contém apenas conteúdo que é usado em qualquer página. O conteúdo não utilizado das pastas de conteúdo não será exibido.",
+      "unusedAssets": "Lista os recursos armazenados no caminho de arquivos selecionado que não são referenciados em nenhum conteúdo do site.",
       "byAuthorAndDate": "Filtre o conteúdo combinando critérios de data e autor.",
       "wipContent": "Visualize o conteúdo marcado como Trabalho em Progresso (WIP). Estes itens ainda estão sendo editados e não estão prontos para publicação.",
       "contentWaitingPublication": "Liste todo o conteúdo que possui uma tarefa de fluxo de trabalho pendente. Isso inclui conteúdo aguardando revisão, aprovação ou publicação.",
@@ -89,6 +91,7 @@
       "typeAuthorSearch": "Condição do autor",
       "originPath": "Exibir as referências de conteúdo encontradas em",
       "destinationPath": "que fazem referência ao conteúdo de",
+      "assetsRootPath": "Buscar sob este caminho de arquivos",
       "dateRange": "Intervalo de datas",
       "authorFilters": "Filtros de autor"
     },
@@ -157,6 +160,16 @@
           "referencePath": "Caminho da referência",
           "lastModified": "Data da última modificação do conteúdo referenciado",
           "link": "Link para a referência"
+        }
+      },
+      "unusedAssets": {
+        "columns": {
+          "mimeType": "Tipo",
+          "name": "Nome do recurso",
+          "path": "Caminho",
+          "creator": "Criado por",
+          "created": "Criado em",
+          "lastModified": "Última modificação"
         }
       },
       "wipContent": {

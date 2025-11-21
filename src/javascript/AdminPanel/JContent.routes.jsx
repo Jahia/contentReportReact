@@ -53,15 +53,6 @@ export const registerJContentRoutes = () => {
         render: createReportRender('20')
     });
 
-    // References
-    registry.add('adminRoute', 'contentReportReact-references', {
-        targets: ['jcontent-jcontent-contentReports'],
-        isSelectable: true,
-        label: 'contentReportReact:menu.references',
-        requireModuleInstalledOnSite: 'contentReportReact',
-        render: createReportRender('23')
-    });
-
     // WIP Content
     registry.add('adminRoute', 'contentReportReact-wipContent', {
         targets: ['jcontent-jcontent-contentReports'],
@@ -92,6 +83,30 @@ export const registerJContentRoutes = () => {
         render: createReportRender('24')
     });
 
+    // References section label (not selectable)
+    registry.add('adminRoute', 'contentReportReact-reference-entry', {
+        targets: ['jcontent-jcontent-contentReports'],
+        isSelectable: false,
+        label: 'contentReportReact:categories.references',
+        requireModuleInstalledOnSite: 'contentReportReact'
+    });
+
+    // References
+    registry.add('adminRoute', 'contentReportReact-references', {
+        targets: ['jcontent-contentReportReact-reference-entry'],
+        isSelectable: true,
+        label: 'contentReportReact:menu.references',
+        requireModuleInstalledOnSite: 'contentReportReact',
+        render: createReportRender('23')
+    });
+    // Unused assets
+    registry.add('adminRoute', 'contentReportReact-unreferencedAssets', {
+        targets: ['jcontent-contentReportReact-reference-entry'],
+        isSelectable: true,
+        label: 'contentReportReact:menu.unusedAssets',
+        requireModuleInstalledOnSite: 'contentReportReact',
+        render: createReportRender('28')
+    });
     // === LANGUAGE CATEGORY ===
 
     // Language category (not selectable)

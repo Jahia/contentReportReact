@@ -5,6 +5,7 @@
     "categories": {
       "overview": "Übersicht",
       "content": "Inhalt",
+      "references": "Referenzen",
       "languages": "Sprachen",
       "visibility": "Sichtbarkeit",
       "metadata": "Metadaten",
@@ -43,6 +44,7 @@
       "byAuthor": "Inhalte auflisten, die von bestimmten Autoren erstellt oder geändert wurden.",
       "byAllDate": "Inhaltsaktivität nach Monat und Typ aufschlüsseln.",
       "references": "Der Bericht enthält nur Inhalte, die auf einer Seite verwendet werden. Nicht verwendete Inhalte aus Inhaltsordnern werden nicht angezeigt.",
+      "unusedAssets": "Listet die Medien unter dem ausgewählten Dateien-Pfad auf, die in keinem Site-Inhalt referenziert werden.",
       "byAuthorAndDate": "Inhalte filtern durch Kombination von Datums- und Autorenkriterien.",
       "wipContent": "Inhalte anzeigen, die als 'In Bearbeitung' (WIP) markiert sind. Diese Elemente werden noch bearbeitet und sind nicht zur Veröffentlichung bereit.",
       "contentWaitingPublication": "Alle Inhalte auflisten, die eine ausstehende Workflow-Aufgabe haben. Dies umfasst Inhalte, die auf Überprüfung, Genehmigung oder Veröffentlichung warten.",
@@ -89,6 +91,7 @@
       "typeAuthorSearch": "Autorenbedingung",
       "originPath": "Die gefundenen Inhaltsreferenzen anzeigen in",
       "destinationPath": "die Inhalte referenzieren von",
+      "assetsRootPath": "Diesen Dateien-Pfad durchsuchen",
       "dateRange": "Datumsbereich",
       "authorFilters": "Autorenfilter"
     },
@@ -157,6 +160,16 @@
           "referencePath": "Pfad der Referenz",
           "lastModified": "Letztes Änderungsdatum des referenzierten Inhalts",
           "link": "Link zur Referenz"
+        }
+      },
+      "unusedAssets": {
+        "columns": {
+          "mimeType": "Typ",
+          "name": "Asset-Name",
+          "path": "Pfad",
+          "creator": "Erstellt von",
+          "created": "Erstellt am",
+          "lastModified": "Zuletzt geändert"
         }
       },
       "wipContent": {

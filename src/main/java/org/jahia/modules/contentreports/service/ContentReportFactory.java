@@ -27,6 +27,7 @@ import org.jahia.modules.contentreports.bean.ReportOverview;
 import org.jahia.modules.contentreports.bean.ReportPagesWithoutDescription;
 import org.jahia.modules.contentreports.bean.ReportPagesWithoutKeyword;
 import org.jahia.modules.contentreports.bean.ReportPagesWithoutTitle;
+import org.jahia.modules.contentreports.bean.ReportUnreferencedAssets;
 import org.jahia.modules.contentreports.bean.ReportWipContent;
 import org.jahia.modules.contentreports.exception.ContentReportException;
 import org.jahia.services.content.decorator.JCRSiteNode;
@@ -154,6 +155,11 @@ public final class ContentReportFactory {
                 return new ReportByExpiredContent(siteNode, cleanPath(params.get("searchPath")));
             case "27":
                 return new ReportByFutureContent(siteNode, cleanPath(params.get("searchPath")));
+            case "28":
+                return new ReportUnreferencedAssets(
+                        siteNode,
+                        cleanPath(params.get("assetsRootPath"))
+                );
             default:
                 throw new ContentReportException("Invalid reportId: " + reportId);
         }

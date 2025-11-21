@@ -668,7 +668,7 @@ const AdminPanel = ({initialReportId}) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selectedReportId]);
 
-    const openPathPicker = useCallback((fieldName, currentValue) => {
+    const openPathPicker = useCallback((fieldName, currentValue, pickerType = 'editorial') => {
         const initialPath = currentValue || baseContentPath || '/';
         const picker = window?.CE_API?.openPicker;
 
@@ -676,7 +676,7 @@ const AdminPanel = ({initialReportId}) => {
 
         if (picker) {
             picker({
-                type: 'editorial',
+                type: pickerType,
                 initialSelectedItem: [initialPath],
                 site: window.jahiaGWTParameters?.siteKey || siteKey,
                 lang: window.jahiaGWTParameters?.uilang || language || 'en',
@@ -693,7 +693,7 @@ const AdminPanel = ({initialReportId}) => {
         }
 
         console.warn('[contentReportReact] Content Editor picker API is not available.');
-    }, [baseContentPath, handleFieldChange, language, siteKey]);
+    }, [baseContentPath, handleFieldChange, language, selectedReport?.id, siteKey]);
 
     const getSelectOptions = useCallback(field => {
         if (field.type === 'languageSelect') {
@@ -811,7 +811,7 @@ const AdminPanel = ({initialReportId}) => {
                             size="big"
                             variant="outlined"
                             label={t('actions.browse')}
-                            onClick={() => openPathPicker(field.name, fields[field.name])}
+                            onClick={() => openPathPicker(field.name, fields[field.name], selectedReport?.id === '28' && field.name === 'assetsRootPath' ? 'folder' : 'editorial')}
                         />
                     )}
                 </div>
