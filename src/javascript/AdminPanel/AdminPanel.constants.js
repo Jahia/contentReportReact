@@ -44,8 +44,8 @@ const reports = [
         type: 'legacy',
         category: 'content',
         fields: [
-            // UI-only fields (not sent to backend, defaults hardcoded in Java)
-            {name: 'typeSearch', type: 'radio', labelKey: 'fields.typeSearch.label', options: typeSearchOptions, defaultValue: 'pages', uiOnly: true},
+            // Position 0: Type search (pages or content) - must be sent to backend
+            {name: 'typeSearch', type: 'radio', labelKey: 'fields.typeSearch.label', options: typeSearchOptions, defaultValue: 'pages', includeIfEmpty: true},
             // Position 1: Path (required, always sent)
             {name: 'pathTxt', type: 'path', labelKey: 'fields.path', defaultValue: PATH_DEFAULT, required: true, includeIfEmpty: true},
             // Position 2: Author search checkbox
@@ -89,7 +89,7 @@ const reports = [
         ],
         columns: [
             {key: 'title', labelKey: 'reports.byAuthorAndDate.columns.title', sortable: true},
-            {key: 'path', labelKey: 'reports.byAuthorAndDate.columns.path', sortable: true},
+            {key: 'path', labelKey: 'reports.byAuthorAndDate.columns.path', sortable: true, type: 'link'},
             {key: 'type', labelKey: 'reports.byAuthorAndDate.columns.type', sortable: true},
             {key: 'created', labelKey: 'reports.byAuthorAndDate.columns.created', sortable: true, type: 'date'},
             {key: 'modified', labelKey: 'reports.byAuthorAndDate.columns.modified', sortable: true, type: 'date'},
@@ -103,7 +103,7 @@ const reports = [
         descriptionKey: 'descriptions.byAuthor',
         type: 'legacy',
         fields: [
-            {name: 'typeSearch', type: 'radio', labelKey: 'fields.typeSearch.label', options: typeSearchOptions, defaultValue: 'pages'},
+            {name: 'typeSearch', type: 'radio', labelKey: 'fields.typeSearch.label', options: typeSearchOptions, defaultValue: 'pages', includeIfEmpty: true},
             {name: 'typeAuthor', type: 'radio', labelKey: 'fields.typeAuthor.label', options: typeAuthorOptions, defaultValue: 'created'},
             {name: 'pathTxt', type: 'path', labelKey: 'fields.path', defaultValue: PATH_DEFAULT, required: true}
         ]
@@ -208,7 +208,7 @@ const reports = [
         type: 'legacy',
         category: 'content',
         fields: [
-            {name: 'typeSearch', type: 'radio', labelKey: 'fields.typeSearch.label', options: typeSearchOptions, defaultValue: 'pages'},
+            {name: 'typeSearch', type: 'radio', labelKey: 'fields.typeSearch.label', options: typeSearchOptions, defaultValue: 'pages', includeIfEmpty: true},
             {name: 'pathTxt', type: 'path', labelKey: 'fields.path', defaultValue: PATH_DEFAULT, required: true}
         ],
         columns: [
@@ -243,7 +243,7 @@ const reports = [
         descriptionKey: 'descriptions.markedForDeletion',
         fields: [
             {name: 'pathTxt', type: 'path', labelKey: 'fields.path', defaultValue: PATH_DEFAULT, required: true},
-            {name: 'typeSearch', type: 'radio', labelKey: 'fields.typeSearch.label', options: typeSearchOptions, defaultValue: 'pages'}
+            {name: 'typeSearch', type: 'radio', labelKey: 'fields.typeSearch.label', options: typeSearchOptions, defaultValue: 'pages', includeIfEmpty: true}
         ],
         columns: [
             {key: 'nodeDisplayableName', labelKey: 'reports.markedForDeletion.columns.title', sortable: true},
@@ -270,7 +270,7 @@ const reports = [
         descriptionKey: 'descriptions.pagesUntranslated',
         fields: [
             {name: 'selectLanguageBU', type: 'languageSelect', labelKey: 'fields.language', defaultValue: ({language}) => language || '', required: true},
-            {name: 'selectTypeSearch', type: 'radio', labelKey: 'fields.typeSearch.label', options: typeSearchOptions, defaultValue: 'pages'},
+            {name: 'selectTypeSearch', type: 'radio', labelKey: 'fields.typeSearch.label', options: typeSearchOptions, defaultValue: 'pages', includeIfEmpty: true},
             {name: 'pathTxt', type: 'path', labelKey: 'fields.path', defaultValue: PATH_DEFAULT, required: true}
         ],
         columns: [

@@ -91,7 +91,7 @@ public class ReportWipContent extends QueryReport {
 
         String orderStatement = " order by item.[" + resultFields[sortCol] + "] " + order;
         String strQuery = "SELECT * FROM ";
-        strQuery += (reportType.equals(BaseReport.SearchContentType.PAGE) ? "[jnt:page] " : "[jmix:editorialContent] ");
+        strQuery += (reportType.equals(BaseReport.SearchContentType.PAGE) ? "[jnt:page] " : "[jnt:content] ");
         strQuery += "AS item WHERE [j:workInProgressStatus] is not null  and [j:workInProgressStatus]<> \""+ Constants.WORKINPROGRESS_STATUS_DISABLED +"\" and ISDESCENDANTNODE(item,['" + searchPath + "'])" + orderStatement;
 
         fillReport(session, strQuery, offset, limit);

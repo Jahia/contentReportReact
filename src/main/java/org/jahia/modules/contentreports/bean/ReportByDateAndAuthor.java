@@ -118,7 +118,7 @@ public class ReportByDateAndAuthor extends QueryReport {
         String nodetype;
         String searchByDateStatement = "";
         String searchByAuthorStatement = "";
-        if (typeSearch.equals("pages")) { nodetype = "jnt:page"; } else { nodetype = "jmix:editorialContent"; }
+        if (typeSearch.equals("pages")) { nodetype = "jnt:page"; } else { nodetype = "jnt:content"; }
         if (searchByDate) {
             String dateSearchField;
             if (typeDateSearch.equals("modified")) { dateSearchField = "jcr:lastModified"; } else { dateSearchField = "jcr:created";   }

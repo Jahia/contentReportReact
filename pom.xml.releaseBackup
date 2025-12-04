@@ -34,7 +34,7 @@
     <groupId>org.jahia.se.modules</groupId>
     <artifactId>contentReportReact</artifactId>
     <name>Content Report</name>
-    <version>1.0.4-SNAPSHOT</version>
+    <version>1.0.5-SNAPSHOT</version>
     <packaging>bundle</packaging>
     <description>This is the custom ReactJS module (Content Report) for running on a Jahia server.</description>
 

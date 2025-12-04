@@ -56,6 +56,12 @@ const buildParameterPayload = (fields, definitions) => {
             return;
         }
 
+        // Skip UI-only fields
+        if (field.uiOnly) {
+            console.log(`[buildParameterPayload] Field ${field.name} is UI-only, skipping`);
+            return;
+        }
+
         const value = fields[field.name];
         console.log(`[buildParameterPayload] Processing field ${field.name}, value:`, value, 'type:', field.type);
 
@@ -750,7 +756,9 @@ const AdminPanel = ({initialReportId}) => {
                     <span className={styles.label}>{t(field.labelKey)}</span>
                     <RadioGroup
                         name={field.name}
+                        value={fields[field.name]}
                         className={styles.radioGroup}
+                        onChange={event => handleFieldChange(field.name, event.target.value)}
                     >
                         {(field.options || []).map(option => (
                             <RadioItem
@@ -758,8 +766,6 @@ const AdminPanel = ({initialReportId}) => {
                                 id={`${field.name}-${option.value}`}
                                 value={option.value}
                                 label={t(option.labelKey)}
-                                checked={fields[field.name] === option.value}
-                                onChange={event => handleFieldChange(field.name, event.target.value)}
                             />
                         ))}
                     </RadioGroup>
