@@ -130,7 +130,6 @@ public class ReportCustomCacheContent extends QueryReport {
 
     public JSONObject getJson() throws JSONException, RepositoryException {
 
-        JSONObject jsonObject = new JSONObject();
         JSONArray jArray = new JSONArray();
 
         for (Map<String, String> nodeMap : this.dataList) {
@@ -142,12 +141,7 @@ public class ReportCustomCacheContent extends QueryReport {
             jArray.put(item);
         }
 
-        jsonObject.put("recordsTotal", totalContent);
-        jsonObject.put("recordsFiltered", totalContent);
-        jsonObject.put("siteName", siteNode.getName());
-        jsonObject.put("siteDisplayableName", siteNode.getDisplayableName());
-        jsonObject.put("data", jArray);
-        return jsonObject;
+        return buildJsonResponse(totalContent, jArray);
     }
 
 

@@ -62,15 +62,16 @@ import java.util.Map;
  */
 public class ReportByAuthor extends QueryReport {
 
-    private final String PROPERTY_COUNT = "itemCount";
-    private final String PROPERTY_AUTHOR_DETAIL = "authorDetail";
-    private final String PROPERTY_PAGE_DETAIL = "pageDetail";
-    private Integer totalItems;
-    private Map<String, Map<String, Object>> dataMap;
-    private Boolean useSystemUser;
-    private String searchPath;
-    private SearchContentType reportType;
-    private SearchActionType actionType;
+    protected final String PROPERTY_COUNT = "itemCount";
+    protected final String PROPERTY_AUTHOR_DETAIL = "authorDetail";
+    protected final String PROPERTY_PAGE_DETAIL = "pageDetail";
+    protected Integer totalItems;
+    protected Map<String, Map<String, Object>> dataMap;
+    protected Boolean useSystemUser;
+    protected String searchPath;
+    protected SearchContentType reportType;
+    protected SearchActionType actionType;
+    protected String propertyName = "";
 
     /**
      * The ReportByAuthor constructor.
@@ -87,6 +88,10 @@ public class ReportByAuthor extends QueryReport {
         this.actionType = actionType;
         this.dataMap = new HashMap<>();
         this.totalItems = 0;
+        if (actionType.equals(SearchActionType.CREATION))
+            this.propertyName = "jcr:createdBy";
+        else if (actionType.equals(SearchActionType.UPDATE))
+            this.propertyName = "jcr:lastModifiedBy";
     }
 
     @Override
@@ -103,12 +108,6 @@ public class ReportByAuthor extends QueryReport {
      * @throws RepositoryException
      */
     public void addItem(JCRNodeWrapper node) throws RepositoryException {
-
-        String propertyName = "";
-        if (actionType.equals(SearchActionType.CREATION))
-            propertyName = "jcr:createdBy";
-        else if (actionType.equals(SearchActionType.UPDATE))
-            propertyName = "jcr:lastModifiedBy";
 
         if (node.hasProperty(propertyName)) {
             String userName = node.getPropertyAsString(propertyName);

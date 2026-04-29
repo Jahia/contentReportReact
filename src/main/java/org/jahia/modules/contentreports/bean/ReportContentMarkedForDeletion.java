@@ -141,7 +141,6 @@ public class ReportContentMarkedForDeletion extends QueryReport {
 
     @Override public JSONObject getJson() throws JSONException, RepositoryException {
 
-        JSONObject jsonObject = new JSONObject();
         JSONArray jArray = new JSONArray();
 
         for (Map<String, String> nodeMap : this.dataList) {
@@ -155,12 +154,7 @@ public class ReportContentMarkedForDeletion extends QueryReport {
             item.put(Boolean.valueOf(nodeMap.get("nodePresentOnPage")) ? "nodePresentOnPage" : "nodeNotPresentOnPage");
             jArray.put(item);
         }
-        jsonObject.put("recordsTotal", totalContent);
-        jsonObject.put("recordsFiltered", totalContent);
-        jsonObject.put("siteName", siteNode.getName());
-        jsonObject.put("siteDisplayableName", siteNode.getDisplayableName());
-        jsonObject.put("data", jArray);
-        return jsonObject;
+        return buildJsonResponse(totalContent, jArray);
     }
 
     private Long countSubNodes(JCRNodeWrapper node) {

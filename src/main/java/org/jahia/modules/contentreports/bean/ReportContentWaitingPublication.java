@@ -113,7 +113,6 @@ public class ReportContentWaitingPublication extends QueryReport {
      */
     public JSONObject getJson() throws JSONException, RepositoryException {
 
-        JSONObject jsonObject = new JSONObject();
         JSONArray jArray = new JSONArray();
         JSONArray jsonArrayItem;
 
@@ -140,13 +139,7 @@ public class ReportContentWaitingPublication extends QueryReport {
             jArray.put(jsonArrayItem);
         }
 
-        jsonObject.put("recordsTotal", totalContent);
-        jsonObject.put("recordsFiltered", totalContent);
-        jsonObject.put("siteName", siteNode.getName());
-        jsonObject.put("siteDisplayableName", siteNode.getDisplayableName());
-        jsonObject.put("data", jArray);
-
-        return jsonObject;
+        return buildJsonResponse(totalContent, jArray);
     }
 
     /* WaitingPublicationElement Class.*/
