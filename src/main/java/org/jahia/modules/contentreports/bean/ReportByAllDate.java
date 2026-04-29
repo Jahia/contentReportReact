@@ -84,7 +84,7 @@ public class ReportByAllDate extends QueryReport {
         this.actionType = actionType;
         this.totalPages = 0;
         this.totalContent = 0;
-        this.setDataMap(new HashMap<Integer, Map<Integer, Map<String, Integer>>>());
+        this.setDataMap(new HashMap<>());
     }
 
     @Override
@@ -124,10 +124,10 @@ public class ReportByAllDate extends QueryReport {
             int month = calendar.get(Calendar.MONTH) + 1;
 
             if (!getDataMap().containsKey(year))
-                getDataMap().put(year, new HashMap());
+                getDataMap().put(year, new HashMap<>());
 
             if (!getDataMap().get(year).containsKey(month))
-                getDataMap().get(year).put(month, new HashMap());
+                getDataMap().get(year).put(month, new HashMap<>());
 
             SearchContentType contentType = node.isNodeType("jnt:page") ? SearchContentType.PAGE : SearchContentType.CONTENT;
 
@@ -162,7 +162,6 @@ public class ReportByAllDate extends QueryReport {
             for (Integer monthKey : dataMap.get(yearKey).keySet()) {
                 jsonObjectItem = new JSONObject();
                 jsonObjectItem.put("year", yearKey);
-                //jsonObjectItem.put("month", monthKey);
                 jsonObjectItem.put("month", Messages.get(BUNDLE, "cgnt_contentReports.month." + monthKey, locale));
                 jsonObjectItem.put("pages", dataMap.get(yearKey).get(monthKey).get(SearchContentType.PAGE.toString()));
                 jsonObjectItem.put("content", dataMap.get(yearKey).get(monthKey).get(SearchContentType.CONTENT.toString()));

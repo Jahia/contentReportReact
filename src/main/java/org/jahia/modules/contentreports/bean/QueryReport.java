@@ -61,7 +61,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * TODO Comment me
+ * Abstract base for reports that execute JCR SQL2 queries.
  *
  * @author toto
  */
@@ -69,7 +69,7 @@ public abstract class QueryReport extends BaseReport {
     private static Logger logger = LoggerFactory.getLogger(QueryReport.class);
     protected List<Map<String, String>> dataList;
 
-    public QueryReport(JCRSiteNode siteNode) {
+    protected QueryReport(JCRSiteNode siteNode) {
         super(siteNode);
         this.dataList = new ArrayList<>();
     }

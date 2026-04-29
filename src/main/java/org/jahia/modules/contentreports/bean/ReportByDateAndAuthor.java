@@ -53,6 +53,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.jcr.RepositoryException;
 import java.util.*;
 
@@ -63,11 +66,11 @@ import java.util.*;
  */
 public class ReportByDateAndAuthor extends QueryReport {
 
-    private static final String BUNDLE = "resources.contentReportReact";
+    private static final Logger LOGGER = LoggerFactory.getLogger(ReportByDateAndAuthor.class);
+
     private Map<Integer, Map<Integer, Map<String, Integer>>> dataMap;
     private Map<String, Map<String, Object>> pageMap;
     private Boolean useSystemUser;
-    private SearchActionType actionType;
     private long totalContent = 0;
     private String searchPath;
     private String typeSearch;
@@ -91,10 +94,10 @@ public class ReportByDateAndAuthor extends QueryReport {
      */
     public ReportByDateAndAuthor(JCRSiteNode siteNode, SearchActionType actionType, String searchPath, String typeSearch, Boolean useSystemUser, Boolean searchByDate, String typeDateSearch, String dateBegin, String dateEnd, Boolean searchAuthor, String searchUsername, String typeAuthorSearch, int sortCol, String sortOrder) {
         super(siteNode);
-        System.out.println("[ReportByDateAndAuthor] Constructor called with searchPath: " + searchPath);
+        LOGGER.debug("[ReportByDateAndAuthor] Constructor called with searchPath: {}", searchPath);
         // Default to site root path if searchPath is empty
         this.searchPath = (searchPath == null || searchPath.trim().isEmpty()) ? siteNode.getPath() : searchPath;
-        System.out.println("[ReportByDateAndAuthor] Using searchPath: " + this.searchPath);
+        LOGGER.debug("[ReportByDateAndAuthor] Using searchPath: {}", this.searchPath);
         this.typeSearch = typeSearch;
         this.searchByDate = searchByDate;
         this.typeDateSearch = typeDateSearch;
@@ -104,12 +107,11 @@ public class ReportByDateAndAuthor extends QueryReport {
         this.searchUsername = searchUsername;
         this.typeAuthorSearch = typeAuthorSearch;
         this.useSystemUser = useSystemUser;
-        this.actionType = actionType;
         this.totalContent = 0;
         this.sortCol = sortCol;
         this.sortOrder = sortOrder;
-        this.setDataMap(new HashMap<Integer, Map<Integer, Map<String, Integer>>>());
-        this.setPageMap(new HashMap<String, Map<String, Object>>());
+        this.setDataMap(new HashMap<>());
+        this.setPageMap(new HashMap<>());
     }
 
     @Override
@@ -135,7 +137,7 @@ public class ReportByDateAndAuthor extends QueryReport {
         String orderStatement = " order by item.["+resultFields[sortCol]+"] " + sortOrder;
 
         query = "SELECT * FROM [ " + nodetype + " ] AS item WHERE ISDESCENDANTNODE(item,['" + searchPath + "']) " + searchByDateStatement + searchByAuthorStatement + orderStatement;
-        System.out.println(query);
+        LOGGER.debug("JCR query: {}", query);
         fillReport(session, query, offset, limit);
         totalContent = getTotalCount(session, query);
     }
@@ -148,9 +150,7 @@ public class ReportByDateAndAuthor extends QueryReport {
      */
 
     public void addItem(JCRNodeWrapper node) throws RepositoryException {
-        String propertyName = "";
-        Date itemDate = null;
-        pageMap.put(node.getIdentifier(), new HashMap<String, Object>());
+        pageMap.put(node.getIdentifier(), new HashMap<>());
         Map<String, Object> nodeEntry = pageMap.get(node.getIdentifier());
         nodeEntry.put("name",  WordUtils.abbreviate(node.getDisplayableName(),90,130,"..."));
         nodeEntry.put("path", node.getPath());
@@ -165,54 +165,6 @@ public class ReportByDateAndAuthor extends QueryReport {
         }
     }
 
-    /*
-    public void addItem(JCRNodeWrapper node) throws RepositoryException {
-        String propertyName = "";
-        Date itemDate = null;
-
-        if (actionType.equals(SearchActionType.CREATION)) {
-            propertyName = "jcr:createdBy";
-            itemDate = node.getCreationDateAsDate();
-        } else if (actionType.equals(SearchActionType.UPDATE)) {
-            propertyName = "jcr:lastModifiedBy";
-            itemDate = node.getLastModifiedAsDate();
-        }
-
-        if (node.hasProperty(propertyName)) {
-            String userName = node.getPropertyAsString(propertyName);
-            if (userName.equalsIgnoreCase("system") && !useSystemUser)
-                return;
-
-            Calendar calendar = new GregorianCalendar();
-            calendar.setTime(itemDate);
-            int year = calendar.get(Calendar.YEAR);
-            int month = calendar.get(Calendar.MONTH) + 1;
-
-            if (!getDataMap().containsKey(year))
-                getDataMap().put(year, new HashMap());
-
-            if (!getDataMap().get(year).containsKey(month))
-                getDataMap().get(year).put(month, new HashMap());
-
-            SearchContentType contentType = node.isNodeType("jnt:page") ? SearchContentType.PAGE : SearchContentType.CONTENT;
-
-            if (getDataMap().get(year).get(month).containsKey(contentType.toString())) {
-                getDataMap().get(year).get(month).put(contentType.toString(), (getDataMap().get(year).get(month).get(contentType.toString()) + 1));
-            } else {
-                getDataMap().get(year).get(month).put(contentType.toString(), 1);
-            }
-
-            if (SearchContentType.PAGE.equals(contentType)) {
-                setTotalPages(getTotalPages() + 1);
-            } else {
-                setTotalContent(getTotalContent() + 1);
-            }
-
-        }
-    }
-
-    */
-
     /**
      * getJson
      *
@@ -224,26 +176,18 @@ public class ReportByDateAndAuthor extends QueryReport {
         JSONArray jArray = new JSONArray();
         JSONArray jsonArrayItem;
 
-        for (String content : pageMap.keySet()) {
+        for (Map.Entry<String, Map<String, Object>> contentEntry : pageMap.entrySet()) {
+            Map<String, Object> contentValue = contentEntry.getValue();
 
-                /*jsonObjectItem = new JSONObject();
-                jsonObjectItem.put("title", pageMap.get(content).get("name"));
-                jsonObjectItem.put("created", pageMap.get(content).get("created"));
-                jsonObjectItem.put("modified", pageMap.get(content).get("modified"));
-                jsonObjectItem.put("published", pageMap.get(content).get("published"));
-                jsonObjectItem.put("locked", pageMap.get(content).get("locked"));
-                jsonObjectItem.put("path", pageMap.get(content).get("path"));
-                jsonObjectItem.put("type", pageMap.get(content).get("type"));
-                /* setting each item to the json object */
                 jsonArrayItem = new JSONArray();
 
-                jsonArrayItem.put(pageMap.get(content).get("name"));
-                jsonArrayItem.put(pageMap.get(content).get("path"));
-                jsonArrayItem.put(pageMap.get(content).get("type"));
-                jsonArrayItem.put(pageMap.get(content).get("created"));
-                jsonArrayItem.put(pageMap.get(content).get("modified"));
-                jsonArrayItem.put(pageMap.get(content).get("published"));
-                jsonArrayItem.put(pageMap.get(content).get("locked"));
+                jsonArrayItem.put(contentValue.get("name"));
+                jsonArrayItem.put(contentValue.get("path"));
+                jsonArrayItem.put(contentValue.get("type"));
+                jsonArrayItem.put(contentValue.get("created"));
+                jsonArrayItem.put(contentValue.get("modified"));
+                jsonArrayItem.put(contentValue.get("published"));
+                jsonArrayItem.put(contentValue.get("locked"));
 
                 jArray.put(jsonArrayItem);
 

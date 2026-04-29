@@ -48,8 +48,6 @@ import org.jahia.services.content.JCRSessionWrapper;
 import org.jahia.services.content.decorator.JCRSiteNode;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.jcr.RepositoryException;
 import java.text.DateFormat;
@@ -63,9 +61,6 @@ import java.util.Map;
  * Created by Juan Carlos Rodas.
  */
 public abstract class BaseReport {
-    /* the logger fot the class */
-    private static Logger logger = LoggerFactory.getLogger(BaseReport.class);
-
     public static final boolean SORT_ASC = true;
     public static final  boolean SORT_DESC = false;
 
@@ -92,11 +87,11 @@ public abstract class BaseReport {
     protected Locale defaultLocale;
     protected Map<String, Locale> localeMap;
 
-    public BaseReport(JCRSiteNode siteNode) {
+    protected BaseReport(JCRSiteNode siteNode) {
         this(siteNode, null);
     }
 
-    public BaseReport(JCRSiteNode siteNode, Locale requestedLocale) {
+    protected BaseReport(JCRSiteNode siteNode, Locale requestedLocale) {
         this.siteNode = siteNode;
         this.localeMap = new HashMap<>();
 

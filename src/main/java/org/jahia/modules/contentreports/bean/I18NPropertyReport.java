@@ -184,16 +184,17 @@ public class I18NPropertyReport extends BaseReport {
         Set<String> languages = siteNode.getLanguages();
 
 
-        for (String path : this.dataMap.keySet()) {
+        for (Map.Entry<String, Map<String, Object>> dataEntry : this.dataMap.entrySet()) {
+            String path = dataEntry.getKey();
 
             jsonArrayItem = new JSONArray();
             jArray2 = new JSONArray();
             jsonArrayItem.put(path);
             jsonObjectItem2 = new JSONObject();
-            for (String langKey : ((HashMap<String, String>) this.dataMap.get(path).get("translations")).keySet()) {
+            for (Map.Entry<String, String> langEntry : ((HashMap<String, String>) dataEntry.getValue().get("translations")).entrySet()) {
 
 
-                jsonObjectItem2.put(langKey, ((HashMap<String, String>) this.dataMap.get(path).get("translations")).get(langKey));
+                jsonObjectItem2.put(langEntry.getKey(), langEntry.getValue());
             }
             Iterator<String> iterator = languages.iterator();
             while(iterator.hasNext()) {

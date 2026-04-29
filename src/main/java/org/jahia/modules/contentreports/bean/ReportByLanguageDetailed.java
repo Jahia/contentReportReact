@@ -52,8 +52,6 @@ import org.jahia.services.content.decorator.JCRSiteNode;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import javax.jcr.*;
 import java.util.*;
 
@@ -63,8 +61,6 @@ import java.util.*;
  * Created by Juan Carlos Rodas.
  */
 public class ReportByLanguageDetailed extends QueryReport {
-
-    private static Logger logger = LoggerFactory.getLogger(ReportByLanguageDetailed.class);
 
     private List<Map<String, String>> listMap;
     private Map<String, String> itemMap;

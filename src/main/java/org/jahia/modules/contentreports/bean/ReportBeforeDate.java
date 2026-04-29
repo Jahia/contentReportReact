@@ -103,9 +103,7 @@ public class ReportBeforeDate extends QueryReport {
 
             Calendar calendar = new GregorianCalendar();
             calendar.setTime(itemDate);
-            int year = calendar.get(Calendar.YEAR);
             int month = calendar.get(Calendar.MONTH) + 1;
-            int day = calendar.get(Calendar.DAY_OF_MONTH) + 1;
             nodeMap = new HashMap<>();
 
             nodeMap.put("date", dateFormat.format(itemDate));

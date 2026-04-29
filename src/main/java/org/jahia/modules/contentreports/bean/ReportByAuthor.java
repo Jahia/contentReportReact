@@ -164,38 +164,40 @@ public class ReportByAuthor extends QueryReport {
         JSONArray jsonArrayItemPageDetail;
         JSONObject jsonObjectSubItemPageDetail;
 
-        for (String key : dataMap.keySet()) {
+        for (Map.Entry<String, Map<String, Object>> entry : dataMap.entrySet()) {
+            String key = entry.getKey();
+            Map<String, Object> dataEntry = entry.getValue();
             jsonObjectItem = new JSONObject();
             jsonObjectItem.put("user", key);
-            jsonObjectItem.put("itemCount", dataMap.get(key).get(PROPERTY_COUNT));
-            jsonObjectItem.put("percentaje", (Float.parseFloat(((Integer) dataMap.get(key).get(PROPERTY_COUNT) * 100) + "") / totalItems));
+            jsonObjectItem.put("itemCount", dataEntry.get(PROPERTY_COUNT));
+            jsonObjectItem.put("percentaje", (Float.parseFloat(((Integer) dataEntry.get(PROPERTY_COUNT) * 100) + "") / totalItems));
 
             /* part of author detail */
-            authorDetail = (ReportByAuthorDetail) dataMap.get(key).get(PROPERTY_AUTHOR_DETAIL);
+            authorDetail = (ReportByAuthorDetail) dataEntry.get(PROPERTY_AUTHOR_DETAIL);
             jsonObjectItemAuthorDetail = new JSONObject();
             jsonObjectItemAuthorDetail.put("totalCount", authorDetail.getTotalAuthorDetailItems());
 
             jsonArrayItemAuthorDetail = new JSONArray();
-            for (String keyAuthorDetail : authorDetail.getDetailAuthorMap().keySet()) {
+            for (Map.Entry<String, Integer> authorDetailEntry : authorDetail.getDetailAuthorMap().entrySet()) {
                 jsonObjectSubItemAuthorDetail = new JSONObject();
-                jsonObjectSubItemAuthorDetail.put("type", keyAuthorDetail);
-                jsonObjectSubItemAuthorDetail.put("typeName", (keyAuthorDetail.split(":")[1]));
-                jsonObjectSubItemAuthorDetail.put("itemCount", authorDetail.getDetailAuthorMap().get(keyAuthorDetail));
-                jsonObjectSubItemAuthorDetail.put("percentaje", (Float.parseFloat((authorDetail.getDetailAuthorMap().get(keyAuthorDetail) * 100) + "") / authorDetail.getTotalAuthorDetailItems()));
+                jsonObjectSubItemAuthorDetail.put("type", authorDetailEntry.getKey());
+                jsonObjectSubItemAuthorDetail.put("typeName", (authorDetailEntry.getKey().split(":")[1]));
+                jsonObjectSubItemAuthorDetail.put("itemCount", authorDetailEntry.getValue());
+                jsonObjectSubItemAuthorDetail.put("percentaje", (Float.parseFloat((authorDetailEntry.getValue() * 100) + "") / authorDetail.getTotalAuthorDetailItems()));
                 jsonArrayItemAuthorDetail.put(jsonObjectSubItemAuthorDetail);
             }
             jsonObjectItemAuthorDetail.put("items", jsonArrayItemAuthorDetail);
             jsonObjectItem.put("itemAuthorDetails", jsonObjectItemAuthorDetail);
 
             /* part of page details */
-            authorPageDetail = (ReportByAuthorPageDetail) dataMap.get(key).get(PROPERTY_PAGE_DETAIL);
+            authorPageDetail = (ReportByAuthorPageDetail) dataEntry.get(PROPERTY_PAGE_DETAIL);
             jsonObjectItemPageDetail = new JSONObject();
             jsonArrayItemPageDetail = new JSONArray();
-            for (String keyPageDetail : authorPageDetail.getDetailAuthorPageMap().keySet()) {
+            for (Map.Entry<String, Map<String, String>> pageDetailEntry : authorPageDetail.getDetailAuthorPageMap().entrySet()) {
                 jsonObjectSubItemPageDetail = new JSONObject();
-                jsonObjectSubItemPageDetail.put("title", keyPageDetail);
-                for (String keyPageDetailItem : authorPageDetail.getDetailAuthorPageMap().get(keyPageDetail).keySet()) {
-                    jsonObjectSubItemPageDetail.put(keyPageDetailItem, authorPageDetail.getDetailAuthorPageMap().get(keyPageDetail).get(keyPageDetailItem));
+                jsonObjectSubItemPageDetail.put("title", pageDetailEntry.getKey());
+                for (Map.Entry<String, String> pageDetailItemEntry : pageDetailEntry.getValue().entrySet()) {
+                    jsonObjectSubItemPageDetail.put(pageDetailItemEntry.getKey(), pageDetailItemEntry.getValue());
                 }
                 jsonArrayItemPageDetail.put(jsonObjectSubItemPageDetail);
             }
