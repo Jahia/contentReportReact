@@ -57,6 +57,7 @@ import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
 import javax.jcr.query.Query;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -157,6 +158,28 @@ public abstract class QueryReport extends BaseReport {
             }
         }
         return 0;
+    }
+
+    /**
+     * Builds a nodeMap pre-populated with the common node properties shared across
+     * multiple report implementations (path, name, type, author, etc.).
+     *
+     * @param node the JCR node to inspect
+     * @return a mutable map with common properties already set
+     * @throws RepositoryException if a JCR property cannot be read
+     */
+    protected Map<String, String> buildBaseNodeMap(JCRNodeWrapper node) throws RepositoryException {
+        Map<String, String> nodeMap = new HashMap<>();
+        nodeMap.put("nodePath", node.getPath());
+        nodeMap.put("nodeUrl", node.getUrl());
+        nodeMap.put("nodeName", node.getName());
+        nodeMap.put("nodeType", node.getPrimaryNodeTypeName());
+        nodeMap.put("nodeTypeTechName", node.getPrimaryNodeTypeName().split(":")[1]);
+        nodeMap.put("nodeTypeName", node.getPrimaryNodeType().getName());
+        nodeMap.put("nodeTypePrefix", node.getPrimaryNodeType().getPrefix());
+        nodeMap.put("nodeTypeAlias", node.getPrimaryNodeType().getAlias());
+        nodeMap.put("nodeAuthor", node.getCreationUser());
+        return nodeMap;
     }
 
     /**

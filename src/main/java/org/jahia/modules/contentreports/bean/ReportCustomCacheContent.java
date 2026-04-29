@@ -43,7 +43,6 @@
  */
 package org.jahia.modules.contentreports.bean;
 
-import org.apache.commons.collections.map.HashedMap;
 import org.apache.commons.lang.StringUtils;
 import org.jahia.services.content.JCRContentUtils;
 import org.jahia.services.content.JCRNodeWrapper;
@@ -104,18 +103,8 @@ public class ReportCustomCacheContent extends QueryReport {
             itemParentPage = JCRContentUtils.getParentOfType(node, "jnt:page");
         }
 
-        Map<String, String> nodeMap = new HashedMap();
-        nodeMap.put("nodePath", node.getPath());
-        nodeMap.put("nodeUrl ", node.getUrl());
-        nodeMap.put("nodeName", node.getName());
-        nodeMap.put("nodeType", node.getPrimaryNodeTypeName());
+        Map<String, String> nodeMap = buildBaseNodeMap(node);
         nodeMap.put("expiration", node.getPropertyAsString("j:expiration"));
-        nodeMap.put("nodeTypeTechName", node.getPrimaryNodeTypeName().split(":")[1]);
-        nodeMap.put("nodeTypeName", node.getPrimaryNodeType().getName());
-        nodeMap.put("nodeTypePrefix", node.getPrimaryNodeType().getPrefix());
-        nodeMap.put("nodeTypePrefix", node.getPrimaryNodeType().getPrefix());
-        nodeMap.put("nodeTypeAlias", node.getPrimaryNodeType().getAlias());
-        nodeMap.put("nodeAuthor", node.getCreationUser());
         nodeMap.put("nodeLockedBy", node.getLockOwner());
         nodeMap.put("nodeUsedInPageName", itemParentPage.getName());
         nodeMap.put("nodeUsedInPageDisplayableName", itemParentPage.getDisplayableName());

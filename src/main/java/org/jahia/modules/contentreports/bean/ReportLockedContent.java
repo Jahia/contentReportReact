@@ -43,7 +43,6 @@
  */
 package org.jahia.modules.contentreports.bean;
 
-import org.apache.commons.collections.map.HashedMap;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.WordUtils;
 import org.jahia.services.content.JCRContentUtils;
@@ -103,17 +102,7 @@ public class ReportLockedContent extends QueryReport {
         if (!node.isNodeType("jnt:page")) {
             itemParentPage = JCRContentUtils.getParentOfType(node, "jnt:page");
         }
-        Map<String, String> nodeMap = new HashedMap();
-        nodeMap.put("nodePath", node.getPath());
-        nodeMap.put("nodeUrl ", node.getUrl());
-        nodeMap.put("nodeName", node.getName());
-        nodeMap.put("nodeType", node.getPrimaryNodeTypeName());
-        nodeMap.put("nodeTypeTechName", node.getPrimaryNodeTypeName().split(":")[1]);
-        nodeMap.put("nodeTypeName", node.getPrimaryNodeType().getName());
-        nodeMap.put("nodeTypePrefix", node.getPrimaryNodeType().getPrefix());
-        nodeMap.put("nodeTypePrefix", node.getPrimaryNodeType().getPrefix());
-        nodeMap.put("nodeTypeAlias", node.getPrimaryNodeType().getAlias());
-        nodeMap.put("nodeAuthor", node.getCreationUser());
+        Map<String, String> nodeMap = buildBaseNodeMap(node);
         nodeMap.put("nodeLockedBy", node.getPropertyAsString("jcr:lockOwner"));
         if (itemParentPage != null) {
             nodeMap.put("nodeUsedInPageName", itemParentPage.getName());
