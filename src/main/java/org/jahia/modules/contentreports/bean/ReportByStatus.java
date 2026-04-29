@@ -57,8 +57,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import javax.jcr.RepositoryException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -71,7 +69,6 @@ public class ReportByStatus extends BaseReport {
     private final String PROPERTY_NAME = "name";
     private final String PROPERTY_LIST = "list";
     private final String PROPERTY_ITEMS = "items";
-    private DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     private Map<String, Map<String, Object>> dataMap;
     private static final String BUNDLE = "resources.contentReportReact";
 

@@ -57,8 +57,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import javax.jcr.RepositoryException;
 import javax.jcr.query.Query;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -69,8 +67,6 @@ import java.util.*;
 public class ReportOverview extends BaseReport {
     private static Logger logger = LoggerFactory.getLogger(ReportOverview.class);
     protected static final String BUNDLE = "resources.contentReportReact";
-
-    protected DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     private Integer pagesNumber;
     private Integer templatesNumber;

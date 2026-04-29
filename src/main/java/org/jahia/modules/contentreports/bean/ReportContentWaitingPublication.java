@@ -74,7 +74,7 @@ public class ReportContentWaitingPublication extends QueryReport {
     private static Logger logger = LoggerFactory.getLogger(ReportContentWaitingPublication.class);
     protected static final String BUNDLE = "resources.contentReportReact";
     private long totalContent;
-    List<WaitingPublicationElement> dataList;
+    List<WaitingPublicationElement> waitingPublicationList;
 
 
     /**
@@ -84,7 +84,7 @@ public class ReportContentWaitingPublication extends QueryReport {
      */
     public ReportContentWaitingPublication(JCRSiteNode siteNode) {
         super(siteNode);
-        this.dataList  = new ArrayList<>();
+        this.waitingPublicationList  = new ArrayList<>();
     }
 
     @Override
@@ -101,7 +101,7 @@ public class ReportContentWaitingPublication extends QueryReport {
      * @throws RepositoryException
      */
     public void addItem(JCRNodeWrapper node) throws RepositoryException {
-            dataList.add(new WaitingPublicationElement(node, localeMap));
+            waitingPublicationList.add(new WaitingPublicationElement(node, localeMap));
     }
 
     /**
@@ -120,7 +120,7 @@ public class ReportContentWaitingPublication extends QueryReport {
         JSONArray jArray2;
         JSONObject jsonObjectItem2;
 
-        for (WaitingPublicationElement element : this.dataList) {
+        for (WaitingPublicationElement element : this.waitingPublicationList) {
             jsonArrayItem = new JSONArray();
             jArray2 = new JSONArray();
             jsonArrayItem.put(element.getName());
