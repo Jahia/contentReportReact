@@ -2,6 +2,8 @@ package org.jahia.modules.contentreports.service;
 
 import org.apache.commons.lang3.StringUtils;
 import org.jahia.modules.contentreports.bean.BaseReport;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.jahia.modules.contentreports.bean.ReportAclInheritanceStopped;
 import org.jahia.modules.contentreports.bean.ReportByAllDate;
 import org.jahia.modules.contentreports.bean.ReportByAuthor;
@@ -36,6 +38,8 @@ import java.util.Collections;
 import java.util.Map;
 
 public final class ContentReportFactory {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ContentReportFactory.class);
 
     private ContentReportFactory() {
     }
@@ -95,15 +99,15 @@ public final class ContentReportFactory {
             case "19":
                 return new ReportAclInheritanceStopped(siteNode);
             case "20":
-                System.out.println("[ContentReportFactory] Building report 20 with params: " + params);
-                System.out.println("[ContentReportFactory] pathTxt raw value: '" + params.get("pathTxt") + "'");
-                System.out.println("[ContentReportFactory] pathTxt cleaned value: '" + cleanPath(params.get("pathTxt")) + "'");
+                LOGGER.debug("Building report 20 with params: {}", params);
+                LOGGER.debug("pathTxt raw value: '{}'", params.get("pathTxt"));
+                LOGGER.debug("pathTxt cleaned value: '{}'", cleanPath(params.get("pathTxt")));
                 // Use typeAuthorSearch if typeAuthor is not provided (due to 5-parameter limit)
                 String typeAuthorValue = params.get("typeAuthor");
                 if (typeAuthorValue == null || typeAuthorValue.isEmpty()) {
                     typeAuthorValue = params.getOrDefault("typeAuthorSearch", "created");
                 }
-                System.out.println("[ContentReportFactory] Using typeAuthor value: '" + typeAuthorValue + "'");
+                LOGGER.debug("Using typeAuthor value: '{}'", typeAuthorValue);
                 return new ReportByDateAndAuthor(
                         siteNode,
                         isCreated(typeAuthorValue) ? BaseReport.SearchActionType.CREATION : BaseReport.SearchActionType.UPDATE,

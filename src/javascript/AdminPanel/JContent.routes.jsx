@@ -207,6 +207,24 @@ export const registerJContentRoutes = () => {
         render: createReportRender('12')
     });
 
+    // === USERS & GROUPS CATEGORY ===
+
+    registry.add('adminRoute', 'contentReportReact-users-groups', {
+        targets: ['jcontent-jcontent-contentReports'],
+        isSelectable: false,
+        label: 'contentReportReact:categories.usersGroups',
+        requireModuleInstalledOnSite: 'contentReportReact'
+    });
+
+    registry.add('adminRoute', 'contentReportReact-users-groups-report', {
+        targets: ['jcontent-contentReportReact-users-groups'],
+        isSelectable: true,
+        label: 'contentReportReact:menu.usersGroups',
+        requireModuleInstalledOnSite: 'contentReportReact',
+
+        render: createReportRender('usersGroups')
+    });
+
     // === SYSTEM CATEGORY ===
 
     // System category (not selectable)

@@ -5,6 +5,7 @@ import {useTranslation} from 'react-i18next';
 import axios from 'axios';
 import {buildReportsConfig} from './AdminPanel.constants';
 import ReportResultsTable from './reports/ReportResultsTable';
+import UsersGroupsReport from './reports/UsersGroupsReport';
 import styles from './AdminPanel.module.scss';
 import {OVERVIEW_QUERY, RAW_REPORT_QUERY, GET_SITE_LANGUAGES_QUERY, GET_ALL_USERS_QUERY} from '../graphql/queries';
 
@@ -511,6 +512,20 @@ const AdminPanel = ({initialReportId}) => {
     const [users, setUsers] = useState([]);
     const [loadingUsers, setLoadingUsers] = useState(false);
 
+    const executeQuery = useCallback(async (query, variables) => {
+        const response = await axios.post(graphqlEndpoint, {query, variables}, {
+            headers: {'Content-Type': 'application/json'},
+            withCredentials: true
+        });
+
+        if (response.data && response.data.errors && response.data.errors.length) {
+            const message = response.data.errors.map(err => err.message).join('\n');
+            throw new Error(message);
+        }
+
+        return response.data.data;
+    }, [graphqlEndpoint]);
+
     // Fetch site languages on mount
     useEffect(() => {
         const fetchSiteLanguages = async () => {
@@ -572,20 +587,6 @@ const AdminPanel = ({initialReportId}) => {
             return newFields;
         });
     }, []);
-
-    const executeQuery = useCallback(async (query, variables) => {
-        const response = await axios.post(graphqlEndpoint, {query, variables}, {
-            headers: {'Content-Type': 'application/json'},
-            withCredentials: true
-        });
-
-        if (response.data && response.data.errors && response.data.errors.length) {
-            const message = response.data.errors.map(err => err.message).join('\n');
-            throw new Error(message);
-        }
-
-        return response.data.data;
-    }, [graphqlEndpoint]);
 
     const runOverview = useCallback(async () => {
         setLoading(true);
@@ -662,7 +663,7 @@ const AdminPanel = ({initialReportId}) => {
 
         if (selectedReport.type === 'overview') {
             runOverview();
-        } else {
+        } else if (selectedReport.type !== 'usersGroups') {
             runLegacy();
         }
     }, [fields, runLegacy, runOverview, selectedReport, t]);
@@ -699,7 +700,7 @@ const AdminPanel = ({initialReportId}) => {
         }
 
         console.warn('[contentReportReact] Content Editor picker API is not available.');
-    }, [baseContentPath, handleFieldChange, language, selectedReport?.id, siteKey]);
+    }, [baseContentPath, handleFieldChange, language, siteKey]);
 
     const getSelectOptions = useCallback(field => {
         if (field.type === 'languageSelect') {
@@ -823,10 +824,10 @@ const AdminPanel = ({initialReportId}) => {
                 </div>
             </div>
         );
-    }, [fields, handleFieldChange, openPathPicker, t, getSelectOptions]);
+    }, [fields, handleFieldChange, openPathPicker, selectedReport?.id, t, getSelectOptions]);
 
     const renderFormFields = () => {
-        if (!selectedReport || selectedReport.type === 'overview') {
+        if (!selectedReport || selectedReport.type === 'overview' || selectedReport.type === 'usersGroups') {
             return null;
         }
 
@@ -873,6 +874,8 @@ const AdminPanel = ({initialReportId}) => {
                                         t={t}
                                     />
                                 </form>
+                            ) : selectedReport?.type === 'usersGroups' ? (
+                                <UsersGroupsReport graphqlEndpoint={graphqlEndpoint}/>
                             ) : selectedReport ? (
                                 <form className={styles.form} onSubmit={handleSubmit}>
                                     {renderFormFields()}
@@ -884,7 +887,7 @@ const AdminPanel = ({initialReportId}) => {
                             )}
                         </div>
                         <div className={styles.fullWidthResults}>
-                            {selectedReport?.type !== 'overview' && (
+                            {selectedReport?.type !== 'overview' && selectedReport?.type !== 'usersGroups' && (
                                 <ResultSection error={error} isLoading={loading} result={result} siteKey={siteKey} language={language} report={selectedReport} t={t}/>
                             )}
                         </div>

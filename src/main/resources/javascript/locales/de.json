@@ -9,7 +9,8 @@
       "languages": "Sprachen",
       "visibility": "Sichtbarkeit",
       "metadata": "Metadaten",
-      "system": "System"
+      "system": "System",
+      "usersGroups": "Benutzer und Gruppen"
     },
     "menu": {
       "overview": "Seitenübersicht",
@@ -37,7 +38,8 @@
       "markedForDeletion": "Zum Löschen markiert",
       "liveContents": "Live-Sichtbarkeitsbedingungen",
       "expiredContents": "Abgelaufener Inhalt",
-      "futureContents": "Geplanter Inhalt"
+      "futureContents": "Geplanter Inhalt",
+      "usersGroups": "Benutzer- und Gruppenbericht"
     },
     "descriptions": {
       "overview": "Erhalten Sie einen sofortigen Überblick über die wichtigsten Kennzahlen der ausgewählten Seite.",
@@ -58,7 +60,8 @@
       "expiredContents": "Inhalte mit abgelaufenen Sichtbarkeitsbedingungen anzeigen. Dieser Bericht identifiziert Inhalte mit Sichtbarkeitsenddaten, die bereits vergangen sind, wodurch der Inhalt auf der Live-Site nicht mehr sichtbar ist.",
       "futureContents": "Inhalte anzeigen, die in Zukunft live gehen sollen. Dieser Bericht zeigt Inhalte mit Sichtbarkeitsstartdaten, die noch nicht erreicht wurden, sodass Sie bevorstehende Inhaltsveröffentlichungen vorher ansehen können.",
       "pagesWithoutKeywords": "Seiten identifizieren, denen SEO-Schlüsselwörter fehlen. Dieser Bericht hilft Ihnen, Seiten zu finden, die Schlüsselwort-Metadaten für eine bessere Suchmaschinenoptimierung benötigen.",
-      "pagesWithoutDescription": "Seiten identifizieren, denen Beschreibungen in einer oder mehreren Sprachen fehlen. Der Bericht zeigt den Pfad und gibt an, welche Sprachen Beschreibungen für bessere SEO und Barrierefreiheit definiert haben."
+      "pagesWithoutDescription": "Seiten identifizieren, denen Beschreibungen in einer oder mehreren Sprachen fehlen. Der Bericht zeigt den Pfad und gibt an, welche Sprachen Beschreibungen für bessere SEO und Barrierefreiheit definiert haben.",
+      "usersGroups": "Erstellen Sie einen CSV-Bericht aller Jahia-Benutzer über alle Sites hinweg einschließlich ihrer Gruppenmitgliedschaften. Berichte werden im JCR gespeichert und können direkt von dieser Seite heruntergeladen werden."
     },
     "fields": {
       "path": "Pfad",
@@ -268,6 +271,41 @@
           "title": "Titel",
           "path": "Pfad"
         }
+      }
+    },
+    "usersGroups": {
+      "title": "Benutzer- und Gruppenbericht",
+      "description": "Erstellen Sie einen CSV-Bericht aller Jahia-Benutzer über alle Sites hinweg einschließlich ihrer Gruppenmitgliedschaften. Berichte werden im JCR gespeichert und können direkt von dieser Seite heruntergeladen werden.",
+      "csvRootPath": "JCR-Stammpfad",
+      "csvRootPathHint": "JCR-Pfad, unter dem Berichtsdateien gespeichert werden (z. B. /sites/systemsite/files)",
+      "browse": "Durchsuchen…",
+      "properties": "Zu exportierende Benutzereigenschaften",
+      "propertiesHint": "Wählen Sie die Benutzereigenschaften aus, die als zusätzliche Spalten im CSV-Bericht enthalten sein sollen.",
+      "selectAll": "Alle auswählen",
+      "clearAll": "Alle löschen",
+      "loadingProperties": "Eigenschaften werden geladen…",
+      "generate": "Bericht erstellen",
+      "generating": "Bericht wird erstellt, bitte warten…",
+      "alreadyGenerating": "Es wird bereits ein Bericht erstellt.",
+      "generateSuccess": "Bericht erfolgreich erstellt.",
+      "generateError": "Beim Erstellen des Berichts ist ein Fehler aufgetreten.",
+      "reportsTitle": "Erstellte Berichte",
+      "refresh": "Aktualisieren",
+      "loadingReports": "Berichte werden geladen…",
+      "noReports": "Noch keine Berichte erstellt.",
+      "colDate": "Datum",
+      "colFile": "Datei",
+      "colActions": "Aktionen",
+      "delete": "Löschen",
+      "picker": {
+        "title": "Ordner auswählen",
+        "close": "Schließen",
+        "select": "Diesen Ordner auswählen",
+        "cancel": "Abbrechen",
+        "empty": "Keine Unterordner",
+        "notFound": "Ordner nicht gefunden",
+        "error": "Ordnerinhalt konnte nicht geladen werden",
+        "loading": "Wird geladen…"
       }
     }
   }

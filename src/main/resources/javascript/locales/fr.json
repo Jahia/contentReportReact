@@ -1,30 +1,5 @@
 {
   "contentReportReact": {
-    "label": {
-      "contentreports": "Content Reports",
-      "byAuthorAndDate": "Par auteur et date",
-      "references": "Références",
-      "wipContent": "Brouillons",
-      "contentWaitingPublication": "Workflows",
-      "markedForDeletion": "Marqués pour suppression",
-      "byLanguage": "Par langue",
-      "pagesWithoutTitle": "Pages sans titre",
-      "pagesUntranslated": "Contenus non traduits",
-      "byVisibilityConditions": "Par conditions de visibilité",
-      "liveContents": "Visibilité en ligne",
-      "expiredContents": "Contenus expirés",
-      "futureContents": "Contenus programmés",
-      "byMetadata": "Par métadonnées",
-      "pagesWithoutKeywords": "Pages sans mots-clés",
-      "pagesWithoutDescription": "Pages sans description",
-      "system": "Système",
-      "lockedContent": "Contenu verrouillé",
-      "customCacheContent": "Cache personnalisé",
-      "aclInheritanceBreak": "Rupture d'héritage ACL",
-      "overview": "Vue d'ensemble du site"
-    }
-  },
-  "contentReportReact": {
     "label": "Content Reports",
     "header": "Content Reports - Site {{siteInfo}}",
     "categories": {
@@ -34,7 +9,8 @@
       "languages": "Langues",
       "visibility": "Visibilité",
       "metadata": "Métadonnées",
-      "system": "Système"
+      "system": "Système",
+      "usersGroups": "Utilisateurs et groupes"
     },
     "menu": {
       "overview": "Vue d'ensemble du site",
@@ -62,7 +38,8 @@
       "markedForDeletion": "Marqués pour suppression",
       "liveContents": "Visibilité en ligne",
       "expiredContents": "Contenus expirés",
-      "futureContents": "Contenus programmés"
+      "futureContents": "Contenus programmés",
+      "usersGroups": "Rapport utilisateurs et groupes"
     },
     "descriptions": {
       "overview": "Obtenez un aperçu instantané des principaux indicateurs du site.",
@@ -83,7 +60,8 @@
       "expiredContents": "Afficher le contenu avec des conditions de visibilité expirées. Ce rapport identifie le contenu ayant des dates de fin de visibilité déjà passées, rendant le contenu invisible sur le site en ligne.",
       "futureContents": "Afficher le contenu programmé pour être publié dans le futur. Ce rapport montre le contenu avec des dates de début de visibilité qui n'ont pas encore été atteintes, vous permettant de prévisualiser les publications de contenu à venir.",
       "pagesWithoutKeywords": "Identifier les pages auxquelles il manque des mots-clés SEO. Ce rapport vous aide à trouver les pages qui nécessitent des métadonnées de mots-clés pour une meilleure optimisation des moteurs de recherche.",
-      "pagesWithoutDescription": "Identifier les pages auxquelles il manque des descriptions dans une ou plusieurs langues. Le rapport affiche le chemin et indique quelles langues ont des descriptions définies pour un meilleur référencement et une meilleure accessibilité."
+      "pagesWithoutDescription": "Identifier les pages auxquelles il manque des descriptions dans une ou plusieurs langues. Le rapport affiche le chemin et indique quelles langues ont des descriptions définies pour un meilleur référencement et une meilleure accessibilité.",
+      "usersGroups": "Générez un rapport CSV de tous les utilisateurs Jahia sur tous les sites, avec leurs appartenances aux groupes. Les rapports sont stockés dans le JCR et peuvent être téléchargés directement depuis cette page."
     },
     "fields": {
       "path": "Chemin",
@@ -293,6 +271,41 @@
           "title": "Titre",
           "path": "Chemin"
         }
+      }
+    },
+    "usersGroups": {
+      "title": "Rapport utilisateurs et groupes",
+      "description": "Générez un rapport CSV de tous les utilisateurs Jahia sur tous les sites, avec leurs appartenances aux groupes. Les rapports sont stockés dans le JCR et peuvent être téléchargés directement depuis cette page.",
+      "csvRootPath": "Chemin racine JCR",
+      "csvRootPathHint": "Chemin JCR où les fichiers de rapport seront stockés (par ex. /sites/systemsite/files)",
+      "browse": "Parcourir…",
+      "properties": "Propriétés utilisateur à exporter",
+      "propertiesHint": "Sélectionnez les propriétés utilisateur à inclure comme colonnes supplémentaires dans le rapport CSV.",
+      "selectAll": "Tout sélectionner",
+      "clearAll": "Tout effacer",
+      "loadingProperties": "Chargement des propriétés…",
+      "generate": "Générer le rapport",
+      "generating": "Génération du rapport, veuillez patienter…",
+      "alreadyGenerating": "Un rapport est déjà en cours de génération.",
+      "generateSuccess": "Rapport généré avec succès.",
+      "generateError": "Une erreur est survenue lors de la génération du rapport.",
+      "reportsTitle": "Rapports générés",
+      "refresh": "Actualiser",
+      "loadingReports": "Chargement des rapports…",
+      "noReports": "Aucun rapport généré pour le moment.",
+      "colDate": "Date",
+      "colFile": "Fichier",
+      "colActions": "Actions",
+      "delete": "Supprimer",
+      "picker": {
+        "title": "Sélectionner un dossier",
+        "close": "Fermer",
+        "select": "Sélectionner ce dossier",
+        "cancel": "Annuler",
+        "empty": "Aucun sous-dossier",
+        "notFound": "Dossier introuvable",
+        "error": "Impossible de charger le contenu du dossier",
+        "loading": "Chargement…"
       }
     }
   }

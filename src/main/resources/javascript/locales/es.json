@@ -9,7 +9,8 @@
       "languages": "Idiomas",
       "visibility": "Visibilidad",
       "metadata": "Metadatos",
-      "system": "Sistema"
+      "system": "Sistema",
+      "usersGroups": "Usuarios y grupos"
     },
     "menu": {
       "overview": "Resumen del sitio",
@@ -37,7 +38,8 @@
       "markedForDeletion": "Marcado para eliminación",
       "liveContents": "Condiciones de visibilidad en vivo",
       "expiredContents": "Contenido caducado",
-      "futureContents": "Contenido programado"
+      "futureContents": "Contenido programado",
+      "usersGroups": "Informe de usuarios y grupos"
     },
     "descriptions": {
       "overview": "Obtenga una instantánea de las métricas clave del sitio seleccionado.",
@@ -58,7 +60,8 @@
       "expiredContents": "Vea el contenido con condiciones de visibilidad caducadas. Este informe identifica el contenido con fechas de finalización de visibilidad que ya han pasado, haciendo que el contenido ya no sea visible en el sitio en vivo.",
       "futureContents": "Vea el contenido programado para estar en vivo en el futuro. Este informe muestra el contenido con fechas de inicio de visibilidad que aún no se han alcanzado, permitiéndole obtener una vista previa de las próximas publicaciones de contenido.",
       "pagesWithoutKeywords": "Identifique las páginas a las que les faltan palabras clave de SEO. Este informe le ayuda a encontrar páginas que necesitan metadatos de palabras clave para una mejor optimización de motores de búsqueda.",
-      "pagesWithoutDescription": "Identifique las páginas a las que les faltan descripciones en uno o más idiomas. El informe muestra la ruta e indica qué idiomas tienen descripciones definidas para un mejor SEO y accesibilidad."
+      "pagesWithoutDescription": "Identifique las páginas a las que les faltan descripciones en uno o más idiomas. El informe muestra la ruta e indica qué idiomas tienen descripciones definidas para un mejor SEO y accesibilidad.",
+      "usersGroups": "Genere un informe CSV de todos los usuarios de Jahia en todos los sitios, incluidas sus pertenencias a grupos. Los informes se almacenan en JCR y se pueden descargar directamente desde esta página."
     },
     "fields": {
       "path": "Ruta",
@@ -268,6 +271,41 @@
           "title": "Título",
           "path": "Ruta"
         }
+      }
+    },
+    "usersGroups": {
+      "title": "Informe de usuarios y grupos",
+      "description": "Genere un informe CSV de todos los usuarios de Jahia en todos los sitios, incluidas sus pertenencias a grupos. Los informes se almacenan en JCR y se pueden descargar directamente desde esta página.",
+      "csvRootPath": "Ruta raíz JCR",
+      "csvRootPathHint": "Ruta JCR donde se almacenarán los archivos del informe (p. ej. /sites/systemsite/files)",
+      "browse": "Examinar…",
+      "properties": "Propiedades de usuario para exportar",
+      "propertiesHint": "Seleccione las propiedades de usuario que se incluirán como columnas adicionales en el informe CSV.",
+      "selectAll": "Seleccionar todo",
+      "clearAll": "Borrar todo",
+      "loadingProperties": "Cargando propiedades…",
+      "generate": "Generar informe",
+      "generating": "Generando informe, espere…",
+      "alreadyGenerating": "Ya se está generando un informe.",
+      "generateSuccess": "Informe generado correctamente.",
+      "generateError": "Se produjo un error al generar el informe.",
+      "reportsTitle": "Informes generados",
+      "refresh": "Actualizar",
+      "loadingReports": "Cargando informes…",
+      "noReports": "Aún no hay informes generados.",
+      "colDate": "Fecha",
+      "colFile": "Archivo",
+      "colActions": "Acciones",
+      "delete": "Eliminar",
+      "picker": {
+        "title": "Seleccionar una carpeta",
+        "close": "Cerrar",
+        "select": "Seleccionar esta carpeta",
+        "cancel": "Cancelar",
+        "empty": "Sin subcarpetas",
+        "notFound": "Carpeta no encontrada",
+        "error": "No se pudo cargar el contenido de la carpeta",
+        "loading": "Cargando…"
       }
     }
   }

@@ -10,6 +10,7 @@ const reportCategories = [
     {id: 'languages', labelKey: 'categories.languages'},
     {id: 'visibility', labelKey: 'categories.visibility'},
     {id: 'metadata', labelKey: 'categories.metadata'},
+    {id: 'usersGroups', labelKey: 'categories.usersGroups'},
     {id: 'system', labelKey: 'categories.system'}
 ];
 
@@ -393,6 +394,14 @@ const reports = [
             {key: 'nodeName', labelKey: 'reports.aclInheritanceBreak.columns.title', sortable: true},
             {key: 'nodePath', labelKey: 'reports.aclInheritanceBreak.columns.path', sortable: true, type: 'link'}
         ]
+    },
+    {
+        id: 'usersGroups',
+        labelKey: 'menu.usersGroups',
+        descriptionKey: 'descriptions.usersGroups',
+        type: 'usersGroups',
+        category: 'usersGroups',
+        fields: []
     }
 ];
 

@@ -20,4 +20,11 @@ public class ContentReportsQueryExtension {
             throws RepositoryException {
         return new GqlContentReports(siteKey, language);
     }
+
+    @GraphQLField
+    @GraphQLName("contentReportsUsersGroups")
+    @GraphQLDescription("Access users and groups report administration")
+    public static GqlContentReportsUsersGroups contentReportsUsersGroups() {
+        return new GqlContentReportsUsersGroups();
+    }
 }

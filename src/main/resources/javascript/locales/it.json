@@ -9,7 +9,8 @@
       "languages": "Lingue",
       "visibility": "Visibilità",
       "metadata": "Metadati",
-      "system": "Sistema"
+      "system": "Sistema",
+      "usersGroups": "Utenti e gruppi"
     },
     "menu": {
       "overview": "Panoramica del sito",
@@ -37,7 +38,8 @@
       "markedForDeletion": "Contrassegnato per l'eliminazione",
       "liveContents": "Condizioni di visibilità dal vivo",
       "expiredContents": "Contenuto scaduto",
-      "futureContents": "Contenuto programmato"
+      "futureContents": "Contenuto programmato",
+      "usersGroups": "Report utenti e gruppi"
     },
     "descriptions": {
       "overview": "Ottieni un'istantanea delle metriche chiave del sito selezionato.",
@@ -58,7 +60,8 @@
       "expiredContents": "Visualizza i contenuti con condizioni di visibilità scadute. Questo report identifica i contenuti con date di fine visibilità già trascorse, rendendo il contenuto non più visibile sul sito live.",
       "futureContents": "Visualizza i contenuti programmati per essere pubblicati in futuro. Questo report mostra i contenuti con date di inizio visibilità non ancora raggiunte, consentendoti di visualizzare in anteprima le prossime pubblicazioni di contenuti.",
       "pagesWithoutKeywords": "Identifica le pagine a cui mancano le parole chiave SEO. Questo report ti aiuta a trovare pagine che necessitano di metadati di parole chiave per una migliore ottimizzazione dei motori di ricerca.",
-      "pagesWithoutDescription": "Identifica le pagine a cui mancano descrizioni in una o più lingue. Il report mostra il percorso e indica quali lingue hanno descrizioni definite per un migliore SEO e accessibilità."
+      "pagesWithoutDescription": "Identifica le pagine a cui mancano descrizioni in una o più lingue. Il report mostra il percorso e indica quali lingue hanno descrizioni definite per un migliore SEO e accessibilità.",
+      "usersGroups": "Genera un report CSV di tutti gli utenti Jahia su tutti i siti, incluse le loro appartenenze ai gruppi. I report vengono archiviati nel JCR e possono essere scaricati direttamente da questa pagina."
     },
     "fields": {
       "path": "Percorso",
@@ -268,6 +271,41 @@
           "title": "Titolo",
           "path": "Percorso"
         }
+      }
+    },
+    "usersGroups": {
+      "title": "Report utenti e gruppi",
+      "description": "Genera un report CSV di tutti gli utenti Jahia su tutti i siti, incluse le loro appartenenze ai gruppi. I report vengono archiviati nel JCR e possono essere scaricati direttamente da questa pagina.",
+      "csvRootPath": "Percorso radice JCR",
+      "csvRootPathHint": "Percorso JCR in cui verranno archiviati i file del report (ad es. /sites/systemsite/files)",
+      "browse": "Sfoglia…",
+      "properties": "Proprietà utente da esportare",
+      "propertiesHint": "Seleziona le proprietà utente da includere come colonne aggiuntive nel report CSV.",
+      "selectAll": "Seleziona tutto",
+      "clearAll": "Cancella tutto",
+      "loadingProperties": "Caricamento proprietà…",
+      "generate": "Genera report",
+      "generating": "Generazione del report, attendere…",
+      "alreadyGenerating": "Un report è già in fase di generazione.",
+      "generateSuccess": "Report generato correttamente.",
+      "generateError": "Si è verificato un errore durante la generazione del report.",
+      "reportsTitle": "Report generati",
+      "refresh": "Aggiorna",
+      "loadingReports": "Caricamento report…",
+      "noReports": "Nessun report generato.",
+      "colDate": "Data",
+      "colFile": "File",
+      "colActions": "Azioni",
+      "delete": "Elimina",
+      "picker": {
+        "title": "Seleziona una cartella",
+        "close": "Chiudi",
+        "select": "Seleziona questa cartella",
+        "cancel": "Annulla",
+        "empty": "Nessuna sottocartella",
+        "notFound": "Cartella non trovata",
+        "error": "Impossibile caricare il contenuto della cartella",
+        "loading": "Caricamento…"
       }
     }
   }

@@ -1,30 +1,5 @@
 {
   "contentReportReact": {
-    "label": {
-      "contentreports": "Content Reports",
-      "byAuthorAndDate": "By author and date",
-      "references": "References",
-      "wipContent": "Work in progress",
-      "contentWaitingPublication": "Workflow instances",
-      "markedForDeletion": "Marked for deletion",
-      "byLanguage": "By Language",
-      "pagesWithoutTitle": "Pages without title",
-      "pagesUntranslated": "Untranslated content",
-      "byVisibilityConditions": "By Visibility Conditions",
-      "liveContents": "Live visibility conditions",
-      "expiredContents": "Expired content",
-      "futureContents": "Scheduled content",
-      "byMetadata": "By Metadata",
-      "pagesWithoutKeywords": "Pages without keywords",
-      "pagesWithoutDescription": "Pages without description",
-      "system": "System",
-      "lockedContent": "Locked content",
-      "customCacheContent": "Custom cache content",
-      "aclInheritanceBreak": "ACL inheritance break",
-      "overview": "Site overview"
-    }
-  },
-  "contentReportReact": {
     "label": "Content Reports",
     "header": "Content Reports - Site {{siteInfo}}",
     "categories": {
@@ -34,7 +9,8 @@
       "languages": "Languages",
       "visibility": "Visibility",
       "metadata": "Metadata",
-      "system": "System"
+      "system": "System",
+      "usersGroups": "Users & Groups"
     },
     "menu": {
       "overview": "Site overview",
@@ -63,7 +39,8 @@
       "markedForDeletion": "Marked for deletion",
       "liveContents": "Live visibility conditions",
       "expiredContents": "Expired content",
-      "futureContents": "Scheduled content"
+      "futureContents": "Scheduled content",
+      "usersGroups": "Report Users & Groups"
     },
     "descriptions": {
       "overview": "Get an instant snapshot of the selected site's key metrics.",
@@ -84,7 +61,8 @@
       "expiredContents": "View content with expired visibility conditions. This report identifies content that has visibility end dates that have already passed, making the content no longer visible on the live site.",
       "futureContents": "View content scheduled to go live in the future. This report shows content with visibility start dates that have not yet been reached, allowing you to preview upcoming content publications.",
       "pagesWithoutKeywords": "Identify pages that are missing SEO keywords. This report helps you find pages that need keyword metadata for better search engine optimization.",
-      "pagesWithoutDescription": "Identify pages that are missing descriptions in one or more languages. The report displays the path and shows which languages have descriptions defined for better SEO and accessibility."
+      "pagesWithoutDescription": "Identify pages that are missing descriptions in one or more languages. The report displays the path and shows which languages have descriptions defined for better SEO and accessibility.",
+      "usersGroups": "Generate a CSV report of all Jahia users across all sites, including their group memberships. Reports are stored in JCR and can be downloaded directly from this page."
     },
     "fields": {
       "path": "Path",
@@ -294,6 +272,41 @@
           "title": "Title",
           "path": "Path"
         }
+      }
+    },
+    "usersGroups": {
+      "title": "Report Users & Groups",
+      "description": "Generate a CSV report of all Jahia users across all sites, including their group memberships. Reports are stored in JCR and can be downloaded directly from this page.",
+      "csvRootPath": "JCR root path",
+      "csvRootPathHint": "JCR path where report files will be stored (e.g. /sites/systemsite/files)",
+      "browse": "Browse…",
+      "properties": "User properties to export",
+      "propertiesHint": "Select the user properties to include as extra columns in the CSV report.",
+      "selectAll": "Select all",
+      "clearAll": "Clear all",
+      "loadingProperties": "Loading properties…",
+      "generate": "Generate report",
+      "generating": "Generating report, please wait…",
+      "alreadyGenerating": "A report is already being generated.",
+      "generateSuccess": "Report generated successfully.",
+      "generateError": "An error occurred while generating the report.",
+      "reportsTitle": "Generated reports",
+      "refresh": "Refresh",
+      "loadingReports": "Loading reports…",
+      "noReports": "No generated reports yet.",
+      "colDate": "Date",
+      "colFile": "File",
+      "colActions": "Actions",
+      "delete": "Delete",
+      "picker": {
+        "title": "Select a folder",
+        "close": "Close",
+        "select": "Select this folder",
+        "cancel": "Cancel",
+        "empty": "No subfolders",
+        "notFound": "Folder not found",
+        "error": "Failed to load folder contents",
+        "loading": "Loading…"
       }
     }
   }

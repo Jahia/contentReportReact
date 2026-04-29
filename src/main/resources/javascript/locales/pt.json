@@ -9,7 +9,8 @@
       "languages": "Idiomas",
       "visibility": "Visibilidade",
       "metadata": "Metadados",
-      "system": "Sistema"
+      "system": "Sistema",
+      "usersGroups": "Usuários e grupos"
     },
     "menu": {
       "overview": "Visão geral do site",
@@ -37,7 +38,8 @@
       "markedForDeletion": "Marcado para exclusão",
       "liveContents": "Condições de visibilidade ao vivo",
       "expiredContents": "Conteúdo expirado",
-      "futureContents": "Conteúdo agendado"
+      "futureContents": "Conteúdo agendado",
+      "usersGroups": "Relatório de usuários e grupos"
     },
     "descriptions": {
       "overview": "Obtenha um instantâneo das métricas-chave do site selecionado.",
@@ -58,7 +60,8 @@
       "expiredContents": "Visualize o conteúdo com condições de visibilidade expiradas. Este relatório identifica o conteúdo com datas de término de visibilidade que já passaram, tornando o conteúdo não mais visível no site ao vivo.",
       "futureContents": "Visualize o conteúdo agendado para estar ao vivo no futuro. Este relatório mostra o conteúdo com datas de início de visibilidade que ainda não foram alcançadas, permitindo visualizar as próximas publicações de conteúdo.",
       "pagesWithoutKeywords": "Identifique páginas que estão sem palavras-chave de SEO. Este relatório ajuda você a encontrar páginas que precisam de metadados de palavras-chave para uma melhor otimização de mecanismos de busca.",
-      "pagesWithoutDescription": "Identifique páginas que estão sem descrições em um ou mais idiomas. O relatório mostra o caminho e indica quais idiomas têm descrições definidas para melhor SEO e acessibilidade."
+      "pagesWithoutDescription": "Identifique páginas que estão sem descrições em um ou mais idiomas. O relatório mostra o caminho e indica quais idiomas têm descrições definidas para melhor SEO e acessibilidade.",
+      "usersGroups": "Gere um relatório CSV de todos os usuários Jahia em todos os sites, incluindo suas associações a grupos. Os relatórios são armazenados no JCR e podem ser baixados diretamente desta página."
     },
     "fields": {
       "path": "Caminho",
@@ -268,6 +271,41 @@
           "title": "Título",
           "path": "Caminho"
         }
+      }
+    },
+    "usersGroups": {
+      "title": "Relatório de usuários e grupos",
+      "description": "Gere um relatório CSV de todos os usuários Jahia em todos os sites, incluindo suas associações a grupos. Os relatórios são armazenados no JCR e podem ser baixados diretamente desta página.",
+      "csvRootPath": "Caminho raiz JCR",
+      "csvRootPathHint": "Caminho JCR onde os arquivos do relatório serão armazenados (ex.: /sites/systemsite/files)",
+      "browse": "Procurar…",
+      "properties": "Propriedades de usuário para exportar",
+      "propertiesHint": "Selecione as propriedades de usuário para incluir como colunas extras no relatório CSV.",
+      "selectAll": "Selecionar tudo",
+      "clearAll": "Limpar tudo",
+      "loadingProperties": "Carregando propriedades…",
+      "generate": "Gerar relatório",
+      "generating": "Gerando relatório, aguarde…",
+      "alreadyGenerating": "Um relatório já está sendo gerado.",
+      "generateSuccess": "Relatório gerado com sucesso.",
+      "generateError": "Ocorreu um erro ao gerar o relatório.",
+      "reportsTitle": "Relatórios gerados",
+      "refresh": "Atualizar",
+      "loadingReports": "Carregando relatórios…",
+      "noReports": "Ainda não há relatórios gerados.",
+      "colDate": "Data",
+      "colFile": "Arquivo",
+      "colActions": "Ações",
+      "delete": "Excluir",
+      "picker": {
+        "title": "Selecionar uma pasta",
+        "close": "Fechar",
+        "select": "Selecionar esta pasta",
+        "cancel": "Cancelar",
+        "empty": "Nenhuma subpasta",
+        "notFound": "Pasta não encontrada",
+        "error": "Falha ao carregar o conteúdo da pasta",
+        "loading": "Carregando…"
       }
     }
   }
