@@ -9,39 +9,56 @@ The Content Report React module offers a modern, user-friendly interface for gen
 ## Features
 
 ### 📊 Site Overview Dashboard
-- **Content Metrics**: Pages, Templates, Users, Content nodes, Editorial content
+- **Content Metrics**: Pages, deployed modules, registered users, content nodes (`jnt:content`), editorial contents (`jmix:editorialContent`)
 - **Workflow Tracking**: Pending workflow tasks count
-- **Asset Management**: Files and Images counts
-- **Language Support**: Visual display of available site languages with flag emojis
+- **Asset Management**: Files (`jnt:file`) and Images (`jmix:image`) counts
+- **Language Support**: Available site languages count with visual display
 - **Content Activity (Last 30 Days)**:
   - New content created
   - Modified content items
   - Published content items
   - Published vs Unpublished nodes comparison
   - Average time from creation to publication
-  - Top 5 contributors ranked by content count (with medal badges 🥇🥈🥉)
+  - Top contributors ranked by content count (with medal badges 🥇🥈🥉)
 
 ### 📝 Content Reports
-- **By Author and Date**: Filter content by author, creation/modification dates
-- **By Content Type**: Analyze content distribution by type
-- **By Status**: View content by publication status
-- **Marked for Deletion**: Track content scheduled for removal
-- **Unreferenced Assets**: Audit files under `/sites/<site>/files` that are not referenced anywhere, with direct links into media folders and inline previews for images
-- **Live Contents**: Report on published content
-- **Expired/Future Content**: Monitor time-sensitive content
+- **By Author and Date**: Filter pages or all content by combining author and date range criteria; supports creation vs. modification date toggle
+- **By Author**: List content created or last modified by a specific author
+- **By All Dates**: Break down content activity per month and type, with creation or modification date scope
+- **Before Date**: List content created or modified before a given date
+- **By Type**: Analyze content distribution grouped by node type
+- **By Type (Detailed)**: Same as By Type with additional per-node detail rows
+- **By Status**: View content filtered by publication status
+- **Work in Progress**: Content marked as WIP — still being edited, not ready for publication
+- **Workflow Instances**: All content with a pending workflow task (awaiting review, approval, or publication)
+- **Marked for Deletion**: Content flagged for removal, including child node counts and publication status
+
+### 🔗 References Reports
+- **References**: Content references between two paths — only shows content actually used on a page
+- **Unused Assets**: Files under a chosen path that are not referenced anywhere in the site, with MIME type icons and direct media folder links
 
 ### 🌍 Language Reports
-- **Pages Without Title**: Identify pages missing titles in specific languages
-- **Untranslated Pages**: Find pages not translated to specific languages
-- **Pages Without Keywords/Description**: SEO-focused reports
+- **Languages**: Content breakdown across all site languages
+- **Language Detail**: Per-language detail for a specific target language
+- **Pages Without Title**: Pages missing a title in one or more languages
+- **Untranslated Content**: Content existing in other languages but missing a translation for the selected target language
 
-### 🔒 Visibility & Security Reports
-- **ACL Inheritance Break**: Detect broken ACL inheritance and DENY permissions
-- **Locked Content**: View currently locked content
+### 👁️ Visibility Reports
+- **Live Visibility Conditions**: Content with active conditional visibility rules, showing conditions, match status, and current visibility state
+- **Expired Content**: Content whose visibility end date has already passed (no longer live)
+- **Scheduled Content**: Content with a future visibility start date not yet reached
+
+### 🔍 Metadata Reports
+- **Pages Without Keywords**: Pages missing SEO keyword metadata
+- **Pages Without Description**: Pages missing descriptions in one or more languages
+
+### 👥 Users & Groups Report
+- **Report Users & Groups**: Generate a CSV report of all Jahia users across all sites, including group memberships; reports are stored in JCR and downloadable directly from the page
 
 ### ⚙️ System Reports
-- **Custom Cache Content**: Track custom-cached content
-- **Workflow Tasks**: Monitor pending workflow tasks
+- **Locked Content**: All content currently locked by users, showing creator, lock holder, and location
+- **Custom Cache Content**: Content with custom cache expiration settings, showing expiration values to help optimize cache performance
+- **ACL Inheritance Break**: Nodes where ACL inheritance has been broken (custom permissions overriding parent), useful for security auditing
 
 ## Requirements
 
